@@ -1,4 +1,4 @@
-package cs225project2;
+//package cs225project2;
 
 import javax.swing.*;
 import java.awt.*;
