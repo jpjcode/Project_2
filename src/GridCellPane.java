@@ -21,11 +21,10 @@ public class GridCellPane extends JPanel {
 		frame.setSize(300, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new GridLayout(4, 4));
-		
+		//test
 		for (int i = 0; i < 16; ++i) {
 			frame.add(new GridCellPane());
 		}
 		frame.setVisible(true);	
 	}
-
 }
