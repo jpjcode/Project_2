@@ -1,24 +1,36 @@
 //package cs225project2;
 
+//Lior Sapir
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GridCellPanel extends JPanel {
 	
 	private CellState state;
-	private boolean isMouseHovering;
+	private boolean isHovering;
 	
+	//store what the panel represents as a button
 	private int gridX;
 	private int gridY;
 	
+	//static variables for colors
+	public static final Color X_RED = new Color(140, 31, 17);
+	public static final Color CIRCLE_GREEN = new Color(123, 192, 109);
+	public static final Color HOVER_YELLOW = new Color(252, 250, 167);
+			
+	
 	public GridCellPanel() {
 		state = CellState.EMPTY;
+		isHovering = false;
 		setBackground(Color.WHITE);
 	}
 	
 	public GridCellPanel(int gridX, int gridY) {
 		state = CellState.EMPTY;
+		isHovering = false;
 		setBackground(Color.WHITE);
+		
 		this.gridX = gridX;
 		this.gridY = gridY;
 	}
@@ -26,19 +38,25 @@ public class GridCellPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, getWidth(), getHeight());
 		
 		if (state == CellState.CORRECT) {
-			g.setColor(Color.GREEN);
-			g.fillOval(0, 0, getWidth(), getHeight());
+			g.setColor(CIRCLE_GREEN);
+			int margin = (getWidth() / 10);
+			g.fillOval(margin, margin, getWidth() - margin * 2, getHeight() - margin * 2);
 		}
 		else if (state == CellState.INCORRECT) {
-			g.setColor(Color.RED);
-			g.drawLine(0, 0, getWidth(), getHeight());
-			g.drawLine(0, getHeight(), getWidth(), 0);
+			g.setColor(X_RED);
+			Graphics2D g2D = (Graphics2D)(g.create());
+			g2D.setStroke(new BasicStroke(2));
+			
+			int margin = (getWidth() / 6);
+			g2D.drawLine(margin, margin, getWidth() - margin, getHeight() - margin);
+			g2D.drawLine(margin, getHeight() - margin, getWidth() - margin, margin);
+			g2D.dispose();
 		}
-		
 	}
 	
 	public void setState(CellState newState) {
@@ -46,35 +64,39 @@ public class GridCellPanel extends JPanel {
 		repaint();
 	}
 	
-	public void setHovering(boolean hovering) {
-		if (hovering) {
-			setBackground(Color.BLUE);
+	public void cycleState() {
+		if (state == CellState.EMPTY) {
+			state = CellState.INCORRECT;
+		}
+		else if (state == CellState.INCORRECT) {
+			state = CellState.CORRECT;
 		}
 		else {
+			state = CellState.EMPTY;
+		}
+		repaint();
+	}
+	
+	public void setHovering(boolean hovering) {
+		if (hovering) {
+			isHovering = true;
+			setBackground(HOVER_YELLOW);
+		}
+		else {
+			isHovering = false;
 			setBackground(Color.WHITE);
 		}
 	}
 	
-	public static void main(String[] args) throws InterruptedException {
-		JFrame frame = new JFrame();
-		frame.setSize(500, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(new GridLayout(4, 4));
-		
-		GridCellPanel cell = new GridCellPanel();
-		frame.add(cell);
-		for (int i = 0; i < 15; ++i) {
-			frame.add(new GridCellPanel());
-		}
-		frame.setVisible(true);
-		
-		Thread.sleep(1000);
-		cell.setState(CellState.CORRECT);
-		cell.setHovering(true);
-		Thread.sleep(1000);
-		cell.setState(CellState.INCORRECT);
-		Thread.sleep(1000);
-		cell.setHovering(false);
+	public boolean isHovering() {
+		return isHovering;
 	}
-
+	
+	public int getGridX() {
+		return gridX;
+	}
+	
+	public int getGridY() {
+		return gridY;
+	}
 }
