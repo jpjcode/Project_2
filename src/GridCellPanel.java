@@ -1,6 +1,4 @@
-//package cs225project2;
-
-//Lior Sapir
+///Lior Sapir
 
 import javax.swing.*;
 import java.awt.*;

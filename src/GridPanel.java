@@ -1,5 +1,3 @@
-//package cs225project2;
-
 //Lior Sapir
 
 import java.awt.*;
