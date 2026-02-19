@@ -11,7 +11,7 @@ public class SidewaysLabel extends JLabel {
 	
 	public SidewaysLabel(String s) {
 		super(s);
-		}
+	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
