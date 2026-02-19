@@ -10,6 +10,9 @@ public class GridListener extends MouseAdapter {
 		if (cell.isHovering()) {
 			cell.cycleState();
 		}
+		
+		//FIXME: print statement showing how you can get the coordinates of the cell when clicking on it
+		System.out.println(cell.getGridX() + ", " + cell.getGridY());
 	}
 	
 	@Override

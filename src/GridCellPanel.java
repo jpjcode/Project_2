@@ -1,42 +1,42 @@
-///Lior Sapir
+//Lior Sapir
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GridCellPanel extends JPanel {
 	
-	private CellState state;
-	private boolean isHovering;
-	
-	//store what the panel represents as a button
-	private int gridX;
-	private int gridY;
-	
 	//static variables for colors
 	public static final Color X_RED = new Color(140, 31, 17);
 	public static final Color CIRCLE_GREEN = new Color(123, 192, 109);
 	public static final Color HOVER_YELLOW = new Color(252, 250, 167);
-			
 	
-	public GridCellPanel() {
-		state = CellState.EMPTY;
-		isHovering = false;
-		setBackground(Color.WHITE);
-	}
+	private CellState state;
+	private boolean isHovering;
 	
-	public GridCellPanel(int gridX, int gridY) {
-		state = CellState.EMPTY;
-		isHovering = false;
-		setBackground(Color.WHITE);
+	private GridLabel sLabel;
+	private GridLabel tLabel;
+	
+	private int gridX;
+	private int gridY;
+	
+	public GridCellPanel(int x, int y, GridLabel s, GridLabel t) {
+		gridX = x;
+		gridY = y;
 		
-		this.gridX = gridX;
-		this.gridY = gridY;
+		sLabel = s;
+		tLabel = t;
+		
+		state = CellState.EMPTY;
+		isHovering = false;
+		setBackground(Color.WHITE);
+		setPreferredSize(new Dimension(PuzzleUI.CELL_SIZE, PuzzleUI.CELL_SIZE));
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		//could set the border instead of doing this
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, getWidth(), getHeight());
 		
@@ -49,7 +49,6 @@ public class GridCellPanel extends JPanel {
 			g.setColor(X_RED);
 			Graphics2D g2D = (Graphics2D)(g.create());
 			g2D.setStroke(new BasicStroke(2));
-			
 			int margin = (getWidth() / 6);
 			g2D.drawLine(margin, margin, getWidth() - margin, getHeight() - margin);
 			g2D.drawLine(margin, getHeight() - margin, getWidth() - margin, margin);
@@ -79,10 +78,16 @@ public class GridCellPanel extends JPanel {
 		if (hovering) {
 			isHovering = true;
 			setBackground(HOVER_YELLOW);
+			
+			sLabel.setHighlighted(true);
+			tLabel.setHighlighted(true);
 		}
 		else {
 			isHovering = false;
 			setBackground(Color.WHITE);
+			
+			sLabel.setHighlighted(false);
+			tLabel.setHighlighted(false);
 		}
 	}
 	
