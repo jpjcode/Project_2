@@ -1,5 +1,3 @@
-package cs225project2;
-
 //Lior Sapir
 
 import javax.swing.*;
@@ -9,23 +7,25 @@ public class GridLabel extends JPanel {
 	
 	public static final Color HIGHLIGHT_BLUE = new Color(228, 233, 250);
 	
-	JLabel text;
-	
-	public GridLabel(String label, boolean sideways) {
+	public GridLabel(String label, int width, int length, boolean sideways) {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		JLabel text;
 		
 		if (sideways) {
-			setPreferredSize(new Dimension(PuzzleUI.CELL_SIZE, PuzzleUI.CELL_SIZE * PuzzleUI.NUM_CANDIDATES));
+			setPreferredSize(new Dimension(width, length));
 			
 			text = new SidewaysLabel(label);
+			//sideways label needs a square size in order to work properly, otherwise it cuts off text with ellipses
+			text.setPreferredSize(new Dimension(length, length));
+			text.setBorder(BorderFactory.createEmptyBorder(0, 8, 0, 8));
 		}
 		else {
-			setPreferredSize(new Dimension(PuzzleUI.CELL_SIZE * PuzzleUI.NUM_CANDIDATES, PuzzleUI.CELL_SIZE));
+			setPreferredSize(new Dimension(length, width));
 			
 			text = new JLabel(label);
-			text.setPreferredSize(new Dimension(PuzzleUI.CELL_SIZE * PuzzleUI.NUM_CANDIDATES, PuzzleUI.CELL_SIZE));
+			text.setPreferredSize(new Dimension(length, width));
 			text.setHorizontalAlignment(JLabel.TRAILING);
-			text.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 8));
+			text.setBorder(BorderFactory.createEmptyBorder(0, 8, 0, 8));
 		}
 		
 		setBackground(Color.WHITE);

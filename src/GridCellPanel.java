@@ -13,30 +13,23 @@ public class GridCellPanel extends JPanel {
 	private CellState state;
 	private boolean isHovering;
 	
-	private GridLabel sLabel;
-	private GridLabel tLabel;
-	
 	private int gridX;
 	private int gridY;
 	
-	public GridCellPanel(int x, int y, GridLabel s, GridLabel t) {
+	public GridCellPanel(int x, int y, int cellSize) {
 		gridX = x;
 		gridY = y;
-		
-		sLabel = s;
-		tLabel = t;
 		
 		state = CellState.EMPTY;
 		isHovering = false;
 		setBackground(Color.WHITE);
-		setPreferredSize(new Dimension(PuzzleUI.CELL_SIZE, PuzzleUI.CELL_SIZE));
+		setPreferredSize(new Dimension(cellSize, cellSize));
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		//could set the border instead of doing this
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, getWidth(), getHeight());
 		
@@ -78,16 +71,10 @@ public class GridCellPanel extends JPanel {
 		if (hovering) {
 			isHovering = true;
 			setBackground(HOVER_YELLOW);
-			
-			sLabel.setHighlighted(true);
-			tLabel.setHighlighted(true);
 		}
 		else {
 			isHovering = false;
 			setBackground(Color.WHITE);
-			
-			sLabel.setHighlighted(false);
-			tLabel.setHighlighted(false);
 		}
 	}
 	

@@ -1,61 +1,94 @@
-package cs225project2;
-
 //Lior Sapir
 
 import java.awt.*;
 import javax.swing.*;
 
-public class PuzzleUI {
-	public static final int NUM_CANDIDATES = 4;
+public class PuzzleUI extends JPanel {
 	public static final int MIN_GRID_SIZE = 132;
 	public static final int MIN_CELL_SIZE = 23;
-	public static final int CELL_SIZE = (MIN_GRID_SIZE / NUM_CANDIDATES < MIN_CELL_SIZE) ? MIN_CELL_SIZE : MIN_GRID_SIZE / NUM_CANDIDATES;
-	public static final int GRID_SIZE = CELL_SIZE * NUM_CANDIDATES;
+	
+	private int cellSize;
+	private int gridSize;
+	
+	public PuzzleUI(int numCandidates) {
+		cellSize = (MIN_GRID_SIZE / numCandidates < MIN_CELL_SIZE) ? MIN_CELL_SIZE : MIN_GRID_SIZE / numCandidates;
+		gridSize = cellSize * numCandidates;
+		
+		setBackground(Color.WHITE);
+		setPreferredSize(new Dimension(gridSize * 3 + 4 * 6, gridSize * 3 + 4 * 6));
+		setLayout(new FlowLayout(FlowLayout.CENTER, 4, 4));
+		setBorder(BorderFactory.createEmptyBorder(4, 0, 0, 0));
+		
+		//empty panels to fill space
+		JPanel pEmpty = new JPanel();
+		JPanel pEmpty2 = new JPanel();
+		pEmpty.setBackground(getBackground());
+		pEmpty2.setBackground(getBackground());
+		pEmpty.setPreferredSize(new Dimension(gridSize, gridSize));
+		pEmpty2.setPreferredSize(new Dimension(gridSize, gridSize));
+		
+		//grid labels
+		GridLabelGroup lt1 = new GridLabelGroup(numCandidates, gridSize, true);
+		GridLabelGroup ls1 = new GridLabelGroup(numCandidates, gridSize, false);
+		
+		GridLabelGroup lt2 = new GridLabelGroup(numCandidates, gridSize, true);
+		GridLabelGroup ls2 = new GridLabelGroup(numCandidates, gridSize, false);
+		
+		//grids
+		GridPanel grid = new GridPanel(numCandidates, gridSize);
+		GridPanel grid2 = new GridPanel(numCandidates, gridSize);
+		GridPanel grid3 = new GridPanel(numCandidates, gridSize);
+		
+		grid.addMouseListener(new GridListener(ls1, lt1));
+		grid2.addMouseListener(new GridListener(ls1, lt2));
+		grid3.addMouseListener(new GridListener(ls2, lt1));
+		
+		//add components into panel
+		//row 1
+		add(pEmpty);
+		add(lt1);
+		add(lt2);
+		
+		//row 2
+		add(ls1);
+		add(grid);
+		add(grid2);
+		
+		//row 3
+		add(ls2);	
+		add(grid3);
+		add(pEmpty2);
+		
+		//make empty panels not visible
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		g.setColor(Color.BLACK);
+		Graphics2D g2D = (Graphics2D)(g.create());
+		g2D.setStroke(new BasicStroke(8));
+		
+		//paint a border on each component except the invisible panels
+		for (Component c : getComponents()) {
+			if ((c instanceof GridPanel) || (c instanceof GridLabelGroup)) {
+				g2D.draw(c.getBounds());
+			}
+		}
+		
+		g2D.dispose();
+	}
 
+	//FIXME: main method for testing
 	public static void main(String[] args) {
-		//Yes I know this code is silly and shouldnt be in a main method this is just a draft
 				JFrame frame = new JFrame();
-				frame.setSize(600, 700);
+				frame.setSize(800, 700);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setLayout(new FlowLayout());
 				
-				//Main panel
-				JPanel p = new JPanel();
-				p.setPreferredSize(new Dimension(GRID_SIZE * 3 + 4 * 3, frame.getHeight()));
-				p.setLayout(new FlowLayout(FlowLayout.LEFT, 4, 4));
-				
-				//empty panel to fill space
-				JPanel pEmpty = new JPanel();
-				pEmpty.setPreferredSize(new Dimension(GRID_SIZE, GRID_SIZE));
-				
-				//grid labels
-				GridLabelGroup lt1 = new GridLabelGroup(true);
-				GridLabelGroup ls1 = new GridLabelGroup(false);
-				
-				GridLabelGroup lt2 = new GridLabelGroup(true);
-				GridLabelGroup ls2 = new GridLabelGroup(false);
-				
-				//grids
-				GridPanel grid = new GridPanel(ls1, lt1);
-				GridPanel grid2 = new GridPanel(ls1, lt2);
-				GridPanel grid3 = new GridPanel(ls2, lt1);
-				grid.addMouseListener(new GridListener());
-				grid2.addMouseListener(new GridListener());
-				grid3.addMouseListener(new GridListener());
-				
-				//add components into main panel
-				p.add(pEmpty);
-				p.add(lt1);
-				p.add(lt2);
-				p.add(ls1);
-				p.add(grid);
-				p.add(grid2);
-				p.add(ls2);	
-				p.add(grid3);
-
-				//add main panel to frame
+				PuzzleUI p = new PuzzleUI(4);
 				frame.add(p);
-				
 				frame.setVisible(true);	
 	}
 }

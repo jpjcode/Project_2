@@ -1,5 +1,3 @@
-package cs225project2;
-
 //Lior Sapir
 
 import javax.swing.*;
@@ -9,18 +7,20 @@ public class GridLabelGroup extends JPanel {
 	
 	GridLabel[] labels;
 	
-	public GridLabelGroup(boolean sideways) {
-		labels = new GridLabel[PuzzleUI.NUM_CANDIDATES];
+	public GridLabelGroup(int numCandidates, int groupSize, boolean sideways) {
+		int labelWidth = groupSize / numCandidates;
+		
+		labels = new GridLabel[numCandidates];
 		
 		if (sideways) {
-			setLayout(new GridLayout(1, PuzzleUI.NUM_CANDIDATES));
+			setLayout(new GridLayout(1, numCandidates));
 		}
 		else {
-			setLayout(new GridLayout(PuzzleUI.NUM_CANDIDATES, 1));
+			setLayout(new GridLayout(numCandidates, 1));
 		}
 		
-		for (int i = 0; i < PuzzleUI.NUM_CANDIDATES; ++i) {
-			labels[i] = new GridLabel("label", sideways);
+		for (int i = 0; i < numCandidates; ++i) {
+			labels[i] = new GridLabel("label", labelWidth, groupSize, sideways);
 			add(labels[i]);
 		}
 	}
@@ -29,4 +29,3 @@ public class GridLabelGroup extends JPanel {
 		return labels;
 	}
 }
-

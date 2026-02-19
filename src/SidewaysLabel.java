@@ -1,5 +1,3 @@
-package cs225project2;
-
 //Lior Sapir
 
 import java.awt.*;
@@ -7,11 +5,12 @@ import javax.swing.*;
 
 public class SidewaysLabel extends JLabel {
 	
+	public SidewaysLabel() {
+		super();
+	}
+	
 	public SidewaysLabel(String s) {
 		super(s);
-		setPreferredSize(new Dimension(PuzzleUI.CELL_SIZE * PuzzleUI.NUM_CANDIDATES, PuzzleUI.CELL_SIZE * PuzzleUI.NUM_CANDIDATES));
-		setHorizontalAlignment(JLabel.LEADING);
-		setBorder(BorderFactory.createEmptyBorder(0, 8, 0, 0));
 		}
 	
 	@Override
