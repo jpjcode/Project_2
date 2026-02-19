@@ -58,8 +58,6 @@ public class PuzzleUI extends JPanel {
 		add(ls2);	
 		add(grid3);
 		add(pEmpty2);
-		
-		//make empty panels not visible
 	}
 	
 	@Override
