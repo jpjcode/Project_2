@@ -1,0 +1,4 @@
+{
+    "someOtherSetting": true,
+    "java.project.sourcePaths": ["src"]
+}
