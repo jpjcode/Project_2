@@ -10,7 +10,16 @@ public class PuzzleUI extends JPanel {
 	private int cellSize;
 	private int gridSize;
 	
+	public PuzzleUI() {
+		this(4);
+	}
+	
 	public PuzzleUI(int numCandidates) {
+		//use 4 as the value if any unreasonable values are received
+		if (numCandidates < 1) {
+			numCandidates = 4;
+		}
+		
 		cellSize = (MIN_GRID_SIZE / numCandidates < MIN_CELL_SIZE) ? MIN_CELL_SIZE : MIN_GRID_SIZE / numCandidates;
 		gridSize = cellSize * numCandidates;
 		
@@ -39,9 +48,9 @@ public class PuzzleUI extends JPanel {
 		GridPanel grid2 = new GridPanel(numCandidates, gridSize);
 		GridPanel grid3 = new GridPanel(numCandidates, gridSize);
 		
-		grid.addMouseListener(new GridListener(ls1, lt1));
-		grid2.addMouseListener(new GridListener(ls1, lt2));
-		grid3.addMouseListener(new GridListener(ls2, lt1));
+		grid.addGridListener(new GridListener(ls1, lt1));
+		grid2.addGridListener(new GridListener(ls1, lt2));
+		grid3.addGridListener(new GridListener(ls2, lt1));
 		
 		//add components into panel
 		//row 1
@@ -68,7 +77,7 @@ public class PuzzleUI extends JPanel {
 		Graphics2D g2D = (Graphics2D)(g.create());
 		g2D.setStroke(new BasicStroke(8));
 		
-		//paint a border on each component except the invisible panels
+		//paint a border around each component except the invisible panels
 		for (Component c : getComponents()) {
 			if ((c instanceof GridPanel) || (c instanceof GridLabelGroup)) {
 				g2D.draw(c.getBounds());
