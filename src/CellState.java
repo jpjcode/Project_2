@@ -1,5 +1,5 @@
 //Lior Sapir
 
 public enum CellState {
-CORRECT, INCORRECT, EMPTY
+    CORRECT, INCORRECT, EMPTY
 }
