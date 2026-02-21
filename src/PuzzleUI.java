@@ -87,8 +87,7 @@ public class PuzzleUI extends JPanel {
 		g2D.dispose();
 	}
 
-	//FIXME: main method for testing
-	public static void main(String[] args) {
+	public void startGame() {
 				JFrame frame = new JFrame();
 				frame.setSize(800, 700);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
