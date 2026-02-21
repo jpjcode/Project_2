@@ -1,4 +1,5 @@
 //Andrew Larrazabal
+//edited by Lior Sapir
 //package project2.Project_2.src;
 //package project2;
 
@@ -29,6 +30,20 @@ public class Grid {
 
     public void setGridCell(int w, int h, CellState state) {
         grid[w][h].setState(state);
+    }
+    
+    public void cycleGridCell(int w, int h) {
+    	GridCell cell = grid[w][h];
+    	
+    	if (cell.getState() == CellState.EMPTY) {
+			cell.setState(CellState.INCORRECT);
+		}
+		else if (cell.getState() == CellState.INCORRECT) {
+			cell.setState(CellState.CORRECT);
+		}
+		else {
+			cell.setState(CellState.EMPTY);
+		}
     }
 
     public boolean equals(Grid other) {

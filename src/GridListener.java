@@ -1,4 +1,5 @@
 //Lior Sapir
+//edited by Andrew Larrazabl
 
 import java.awt.event.*;
 
@@ -6,7 +7,6 @@ public class GridListener extends MouseAdapter {
 	
 	GridLabel[] sLabels;
 	GridLabel[] tLabels;
-	private CellState state;
 	private Grid grid;
 	
 	public GridListener() {
@@ -14,13 +14,14 @@ public class GridListener extends MouseAdapter {
 		tLabels = null;
 	}
 	
+	public GridListener(GridLabelGroup s, GridLabelGroup t) {
+		this(s, t, new Grid());
+	}
+	
 	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid) {
 		sLabels = (s != null) ? s.getLabels() : null;
 		tLabels = (t != null) ? t.getLabels() : null;
 		this.grid = grid;
-
-		//FIXME: how to construct current cell state to pass into grid class
-		// state = CellState.EMPTY
 	}
 	
 	@Override
@@ -31,8 +32,7 @@ public class GridListener extends MouseAdapter {
 		if (cell.isHovering()) {
 			cell.cycleState();
 			
-			//FIXME: the gridListener should also have an internal Grid object that it can talk to and change its state
-			grid.setGridCell(cell.getGridX(), cell.getGridY(), state);
+			grid.cycleGridCell(cell.getGridX(), cell.getGridY());
 		}
 	}
 	
