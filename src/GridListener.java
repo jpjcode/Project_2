@@ -4,8 +4,8 @@ import java.awt.event.*;
 
 public class GridListener extends MouseAdapter {
 	
-	GridLabel[] sLabels;
-	GridLabel[] tLabels;
+	private GridLabel[] sLabels;
+	private GridLabel[] tLabels;
 	
 	public GridListener() {
 		sLabels = null;

@@ -7,7 +7,7 @@ import javax.swing.*;
 public class GridPanel extends JPanel {
 
 	//FIXME: we might not end up needing this array or this custom class at all depending on how GridListener is implemented
-	GridCellPanel[] panels;
+	private GridCellPanel[] panels;
 	
 	public GridPanel(int numCandidates, int gridSize) {	
 		int cellSize = gridSize / numCandidates;
