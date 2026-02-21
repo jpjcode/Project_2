@@ -16,7 +16,15 @@ public class GridCellPanel extends JPanel {
 	private int gridX;
 	private int gridY;
 	
-	public GridCellPanel(int x, int y, int cellSize) {
+	public GridCellPanel() {
+		this(33);
+	}
+	
+	public GridCellPanel(int cellSize) {
+		this(cellSize, -1, 1);
+	}
+	
+	public GridCellPanel(int cellSize, int x, int y) {
 		gridX = x;
 		gridY = y;
 		
@@ -47,6 +55,10 @@ public class GridCellPanel extends JPanel {
 			g2D.drawLine(margin, getHeight() - margin, getWidth() - margin, margin);
 			g2D.dispose();
 		}
+	}
+	
+	public CellState getstate() {
+		return state;
 	}
 	
 	public void setState(CellState newState) {

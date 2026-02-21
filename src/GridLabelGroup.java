@@ -1,3 +1,5 @@
+package cs225project2;
+
 //Lior Sapir
 
 import javax.swing.*;
@@ -6,6 +8,18 @@ import java.awt.*;
 public class GridLabelGroup extends JPanel {
 	
 	private GridLabel[] labels;
+	
+	public GridLabelGroup() {
+		this(4);
+	}
+	
+	public GridLabelGroup(int numCandidates) {
+		this(numCandidates, 132);
+	}
+	
+	public GridLabelGroup(int numCandidates, int groupSize) {
+		this(numCandidates, groupSize, false);
+	}
 	
 	public GridLabelGroup(int numCandidates, int groupSize, boolean sideways) {
 		int labelWidth = groupSize / numCandidates;

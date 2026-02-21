@@ -6,8 +6,15 @@ import javax.swing.*;
 
 public class GridPanel extends JPanel {
 
-	//FIXME: we might not end up needing this array or this custom class at all depending on how GridListener is implemented
 	private GridCellPanel[] panels;
+	
+	public GridPanel() {
+		this(4);
+	}
+	
+	public GridPanel(int numCandidates) {
+		this(numCandidates, 132);
+	}
 	
 	public GridPanel(int numCandidates, int gridSize) {	
 		int cellSize = gridSize / numCandidates;
@@ -23,8 +30,7 @@ public class GridPanel extends JPanel {
 		}
 	}
 	
-	@Override
-	public void addMouseListener(MouseListener l) {
+	public void addGridListener(GridListener l) {
 		for (int i = 0; i < panels.length; ++i) {
 				panels[i].addMouseListener(l);
 		}

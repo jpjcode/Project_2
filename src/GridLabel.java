@@ -7,6 +7,18 @@ public class GridLabel extends JPanel {
 	
 	public static final Color HIGHLIGHT_BLUE = new Color(228, 233, 250);
 	
+	public GridLabel() {
+		this("");
+	}
+	
+	public GridLabel(String label) {
+		this(label, 33, 132);
+	}
+	
+	public GridLabel(String label, int width, int length) {
+		this(label, width, length, false);
+	}
+	
 	public GridLabel(String label, int width, int length, boolean sideways) {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		JLabel text;
