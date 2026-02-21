@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class GridLabelGroup extends JPanel {
 	
-	GridLabel[] labels;
+	private GridLabel[] labels;
 	
 	public GridLabelGroup(int numCandidates, int groupSize, boolean sideways) {
 		int labelWidth = groupSize / numCandidates;
