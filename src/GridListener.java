@@ -12,7 +12,7 @@ public class GridListener extends MouseAdapter {
 		tLabels = null;
 	}
 	
-	public GridListener(GridLabelGroup s, GridLabelGroup t) {
+	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid) {
 		sLabels = (s != null) ? s.getLabels() : null;
 		tLabels = (t != null) ? t.getLabels() : null;
 	}

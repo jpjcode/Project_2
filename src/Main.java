@@ -1,6 +1,8 @@
 
 class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        PuzzleUI game = new PuzzleUI(4);
+
+        game.main();
     }
 }
