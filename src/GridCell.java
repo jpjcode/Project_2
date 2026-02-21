@@ -3,32 +3,36 @@
 
 public class GridCell {
     //ATTRIBUTES
-    boolean isTrue;
+    CellState state;
 
     public GridCell() {
-        this(false);
+        this(CellState.EMPTY);
     }
 
-    public GridCell(boolean state) {
-        isTrue = state;
+    public GridCell(CellState state) {
+        this.state = state;
     }
 
-    public boolean getState() {
-        return isTrue;
+    public CellState getState() {
+        return state;
     } 
 
-    public void setState(boolean state) {
-        isTrue = state;
+    public void setState(CellState state) {
+        this.state = state;
     }
     
     public boolean equals(GridCell other) {
-        return isTrue == other.getState();
+        return state == other.getState();
     }
 
     @Override
     public String toString() {
         String s = "";
-
+        //FIXME: Might need to change CellState to include a toString method as well
+        /*
+        String s = state.toString();
         return s;
+        */
+       return s;
     }
 }

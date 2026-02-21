@@ -27,7 +27,7 @@ public class Grid {
         return grid[w][h];
     }
 
-    public void setGridCell(int w, int h, boolean state) {
+    public void setGridCell(int w, int h, CellState state) {
         grid[w][h].setState(state);
     }
 

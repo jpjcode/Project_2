@@ -4,8 +4,10 @@ import java.awt.event.*;
 
 public class GridListener extends MouseAdapter {
 	
-	private GridLabel[] sLabels;
-	private GridLabel[] tLabels;
+	GridLabel[] sLabels;
+	GridLabel[] tLabels;
+	private CellState state;
+	private Grid grid;
 	
 	public GridListener() {
 		sLabels = null;
@@ -15,6 +17,10 @@ public class GridListener extends MouseAdapter {
 	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid) {
 		sLabels = (s != null) ? s.getLabels() : null;
 		tLabels = (t != null) ? t.getLabels() : null;
+		this.grid = grid;
+
+		//FIXME: how to construct current cell state to pass into grid class
+		// state = CellState.EMPTY
 	}
 	
 	@Override
@@ -26,6 +32,7 @@ public class GridListener extends MouseAdapter {
 			cell.cycleState();
 			
 			//FIXME: the gridListener should also have an internal Grid object that it can talk to and change its state
+			grid.setGridCell(cell.getGridX(), cell.getGridY(), state);
 		}
 	}
 	
