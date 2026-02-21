@@ -20,8 +20,12 @@ public class GridListener extends MouseAdapter {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		GridCellPanel cell = (GridCellPanel)e.getComponent();
+		
+		//this if statement just prevents the state change if the user clicked on the component but released the mouse outside the component
 		if (cell.isHovering()) {
 			cell.cycleState();
+			
+			//FIXME: the gridListener should also have an internal Grid object that it can talk to and change its state
 		}
 	}
 	
