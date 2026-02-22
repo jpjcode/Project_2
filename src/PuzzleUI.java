@@ -1,4 +1,5 @@
 //Lior Sapir
+//edited by Andrew Larrazabal
 
 import java.awt.*;
 import javax.swing.*;
@@ -32,7 +33,11 @@ public class PuzzleUI extends JPanel {
 		pEmpty2.setPreferredSize(new Dimension(gridSize, gridSize));
 		
 		//FIXME:placeholder
-		String[] text = {"label1", "label2", "label3", "label4"}; 
+		String[] text = new String[numCandidates];
+		
+		for (int i = 0; i < numCandidates; ++i) {
+			text[i] = "label" + (i + 1);
+		}
 		
 		//grid labels
 		GridLabelGroup lt1 = new GridLabelGroup(text, gridSize, true);
@@ -83,16 +88,5 @@ public class PuzzleUI extends JPanel {
 		}
 		
 		g2D.dispose();
-	}
-
-	public void startGame() {
-				JFrame frame = new JFrame();
-				frame.setSize(800, 700);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setLayout(new FlowLayout());
-				
-				PuzzleUI p = new PuzzleUI(4);
-				frame.add(p);
-				frame.setVisible(true);	
 	}
 }

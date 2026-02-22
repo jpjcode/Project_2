@@ -14,7 +14,7 @@ public class GridListener extends MouseAdapter {
 	}
 	
 	public GridListener(GridLabelGroup s, GridLabelGroup t) {
-		this(s, t, new Grid());
+		this(s, t, null);
 	}
 	
 	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid) {
@@ -30,8 +30,10 @@ public class GridListener extends MouseAdapter {
 		//this if statement just prevents the state change if the user clicked on the component but released the mouse outside the component
 		if (cell.isHovering()) {
 			cell.cycleState();
-			
-			grid.cycleGridCell(cell.getGridX(), cell.getGridY());
+		
+			if (grid != null) {
+				grid.cycleGridCell(cell.getGridX(), cell.getGridY());
+			}
 		}
 	}
 	
