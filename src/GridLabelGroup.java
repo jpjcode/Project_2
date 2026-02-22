@@ -1,5 +1,3 @@
-package cs225project2;
-
 //Lior Sapir
 
 import javax.swing.*;
@@ -10,31 +8,31 @@ public class GridLabelGroup extends JPanel {
 	private GridLabel[] labels;
 	
 	public GridLabelGroup() {
-		this(4);
+		this(new String[] {"", "", "", ""});
 	}
 	
-	public GridLabelGroup(int numCandidates) {
-		this(numCandidates, 132);
+	public GridLabelGroup(String[] text) {
+		this(text, 132);
 	}
 	
-	public GridLabelGroup(int numCandidates, int groupSize) {
-		this(numCandidates, groupSize, false);
+	public GridLabelGroup(String[] text, int groupSize) {
+		this(text, groupSize, false);
 	}
 	
-	public GridLabelGroup(int numCandidates, int groupSize, boolean sideways) {
-		int labelWidth = groupSize / numCandidates;
+	public GridLabelGroup(String[] text, int groupSize, boolean sideways) {
+		int labelWidth = groupSize / text.length;
 		
-		labels = new GridLabel[numCandidates];
+		labels = new GridLabel[text.length];
 		
 		if (sideways) {
-			setLayout(new GridLayout(1, numCandidates));
+			setLayout(new GridLayout(1, text.length));
 		}
 		else {
-			setLayout(new GridLayout(numCandidates, 1));
+			setLayout(new GridLayout(text.length, 1));
 		}
 		
-		for (int i = 0; i < numCandidates; ++i) {
-			labels[i] = new GridLabel("label", labelWidth, groupSize, sideways);
+		for (int i = 0; i < text.length; ++i) {
+			labels[i] = new GridLabel(text[i], labelWidth, groupSize, sideways);
 			add(labels[i]);
 		}
 	}

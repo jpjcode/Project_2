@@ -1,3 +1,5 @@
+package cs225project2;
+
 //Lior Sapir
 
 import java.awt.*;
@@ -14,12 +16,7 @@ public class PuzzleUI extends JPanel {
 		this(4);
 	}
 	
-	public PuzzleUI(int numCandidates) {
-		//use 4 as the value if any unreasonable values are received
-		if (numCandidates < 1) {
-			numCandidates = 4;
-		}
-		
+	public PuzzleUI(int numCandidates) {	
 		cellSize = (MIN_GRID_SIZE / numCandidates < MIN_CELL_SIZE) ? MIN_CELL_SIZE : MIN_GRID_SIZE / numCandidates;
 		gridSize = cellSize * numCandidates;
 		
@@ -36,12 +33,15 @@ public class PuzzleUI extends JPanel {
 		pEmpty.setPreferredSize(new Dimension(gridSize, gridSize));
 		pEmpty2.setPreferredSize(new Dimension(gridSize, gridSize));
 		
-		//grid labels
-		GridLabelGroup lt1 = new GridLabelGroup(numCandidates, gridSize, true);
-		GridLabelGroup ls1 = new GridLabelGroup(numCandidates, gridSize, false);
+		//FIXME:placeholder
+		String[] text = {"label1", "label2", "label3", "label4"}; 
 		
-		GridLabelGroup lt2 = new GridLabelGroup(numCandidates, gridSize, true);
-		GridLabelGroup ls2 = new GridLabelGroup(numCandidates, gridSize, false);
+		//grid labels
+		GridLabelGroup lt1 = new GridLabelGroup(text, gridSize, true);
+		GridLabelGroup ls1 = new GridLabelGroup(text, gridSize, false);
+		
+		GridLabelGroup lt2 = new GridLabelGroup(text, gridSize, true);
+		GridLabelGroup ls2 = new GridLabelGroup(text, gridSize, false);
 		
 		//grids
 		GridPanel grid = new GridPanel(numCandidates, gridSize);

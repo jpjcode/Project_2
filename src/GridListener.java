@@ -1,17 +1,16 @@
 //Lior Sapir
-//edited by Andrew Larrazabl
+//edited by Andrew Larrazabal
 
 import java.awt.event.*;
 
 public class GridListener extends MouseAdapter {
 	
-	GridLabel[] sLabels;
-	GridLabel[] tLabels;
+	private GridLabelGroup sLabelGroup;
+	private GridLabelGroup tLabelGroup;
 	private Grid grid;
 	
 	public GridListener() {
-		sLabels = null;
-		tLabels = null;
+		this(null, null);
 	}
 	
 	public GridListener(GridLabelGroup s, GridLabelGroup t) {
@@ -19,8 +18,8 @@ public class GridListener extends MouseAdapter {
 	}
 	
 	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid) {
-		sLabels = (s != null) ? s.getLabels() : null;
-		tLabels = (t != null) ? t.getLabels() : null;
+		sLabelGroup = s;
+		tLabelGroup = t;
 		this.grid = grid;
 	}
 	
@@ -41,11 +40,11 @@ public class GridListener extends MouseAdapter {
 		GridCellPanel cell = (GridCellPanel)e.getComponent();
 		cell.setHovering(true);
 		
-		if (sLabels != null) {
-			sLabels[cell.getGridY()].setHighlighted(true);
+		if (sLabelGroup != null) {
+			sLabelGroup.getLabels()[cell.getGridY()].setHighlighted(true);
 		}
-		if (tLabels != null) {
-			tLabels[cell.getGridX()].setHighlighted(true);
+		if (tLabelGroup != null) {
+			tLabelGroup.getLabels()[cell.getGridX()].setHighlighted(true);
 		}
 	}
 	
@@ -54,11 +53,11 @@ public class GridListener extends MouseAdapter {
 		GridCellPanel cell = (GridCellPanel)e.getComponent();
 		cell.setHovering(false);
 		
-		if (sLabels != null) {
-			sLabels[cell.getGridY()].setHighlighted(false);
+		if (sLabelGroup != null) {
+			sLabelGroup.getLabels()[cell.getGridY()].setHighlighted(false);
 		}
-		if (tLabels != null) {
-			tLabels[cell.getGridX()].setHighlighted(false);
+		if (tLabelGroup != null) {
+			tLabelGroup.getLabels()[cell.getGridX()].setHighlighted(false);
 		}
 	}
 }

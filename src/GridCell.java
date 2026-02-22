@@ -1,4 +1,4 @@
-//Andrew Larrazabl
+//Andrew Larrazabal
 //package project2.Project_2.src;
 
 public class GridCell {
