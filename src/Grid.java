@@ -4,51 +4,53 @@
 //package project2;
 
 //Grid class to set up the logic puzzle
+
+import java.util.Scanner;
+
 public class Grid {
     private GridCell[][] grid;
-    private int width;
-    private int height;
 
     public Grid() {
-        this(4, 4);
+        this(4, 4, "");
     }
 
-    public Grid(int width, int height) {
-        this.width = width;
-        this.height = height;
-        grid = new GridCell[width][height];
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                grid[i][j] = new GridCell();
+    public Grid(int width, int height, String s) {
+
+        Scanner scnr = new Scanner(s);
+        grid = new GridCell[height][width];
+
+        for (int i = 0; i < height; i++) {
+            int correctCell = scnr.nextInt();
+
+            for (int j = 0; j < width; j++) {
+                if (correctCell == j) {
+                    grid[i][j] = new GridCell(true);
+                } else {
+                    grid[i][j] = new GridCell();
+                }
             }
         }
     }
 
     public GridCell getGridCell(int w, int h) {
-        return grid[w][h];
+        return grid[h][w];
     }
 
-    public void setGridCell(int w, int h, CellState state) {
-        grid[w][h].setState(state);
+    public void setGridCell(int w, int h, boolean state) {
+        grid[h][w].setState(state);
     }
-    
-    public void cycleGridCell(int w, int h) {
-    	GridCell cell = grid[w][h];
-    	
-    	if (cell.getState() == CellState.EMPTY) {
-			cell.setState(CellState.INCORRECT);
-		}
-		else if (cell.getState() == CellState.INCORRECT) {
-			cell.setState(CellState.CORRECT);
-		}
-		else {
-			cell.setState(CellState.EMPTY);
-		}
+
+    public int getGridHeight() {
+        return grid.length;
+    }
+
+    public int getGridWidth() {
+        return grid[0].length;
     }
 
     public boolean equals(Grid other) {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
                 GridCell otherCell = other.getGridCell(i, j);
                 GridCell currentCell = grid[i][j];
                 if (!currentCell.equals(otherCell)) {
@@ -63,8 +65,8 @@ public class Grid {
     public String toString() {
         String string = "";
 
-        string += "Width: " + width + "\n" +
-                  "Height: " + height + "\n";
+        string += "Width: " + grid[0].length + "\n" +
+                  "Height: " + grid.length + "\n";
 
         return string;
     }

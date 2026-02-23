@@ -1,7 +1,8 @@
 //Lior Sapir
 //edited by Andrew Larrazabal
 
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GridListener extends MouseAdapter {
 	
@@ -32,7 +33,11 @@ public class GridListener extends MouseAdapter {
 			cell.cycleState();
 		
 			if (grid != null) {
-				grid.cycleGridCell(cell.getGridX(), cell.getGridY());
+				if (cell.getState() == CellState.CORRECT) {
+					grid.setGridCell(cell.getGridX(), cell.getGridY(), true);
+				} else {
+					grid.setGridCell(cell.getGridX(), cell.getGridY(), false);
+				}
 			}
 		}
 	}

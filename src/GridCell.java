@@ -3,21 +3,21 @@
 
 public class GridCell {
     //ATTRIBUTES
-    CellState state;
+    boolean state;
 
     public GridCell() {
-        this(CellState.EMPTY);
+        this(false);
     }
 
-    public GridCell(CellState state) {
+    public GridCell(boolean state) {
         this.state = state;
     }
 
-    public CellState getState() {
+    public boolean getState() {
         return state;
     } 
 
-    public void setState(CellState state) {
+    public void setState(boolean state) {
         this.state = state;
     }
     
@@ -28,11 +28,7 @@ public class GridCell {
     @Override
     public String toString() {
         String s = "";
-        //FIXME: Might need to change CellState to include a toString method as well
-        /*
-        String s = state.toString();
-        return s;
-        */
+        
        return s;
     }
 }

@@ -1,7 +1,12 @@
 //Lior Sapir
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.JPanel;
 
 public class GridCellPanel extends JPanel {
 	
@@ -57,7 +62,7 @@ public class GridCellPanel extends JPanel {
 		}
 	}
 	
-	public CellState getstate() {
+	public CellState getState() {
 		return state;
 	}
 	
