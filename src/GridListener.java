@@ -4,24 +4,30 @@
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JTable;
+
 public class GridListener extends MouseAdapter {
 	
 	private GridLabelGroup sLabelGroup;
 	private GridLabelGroup tLabelGroup;
 	private Grid grid;
+	private JTable table;
+	private int tableColumn;
 	
 	public GridListener() {
-		this(null, null);
-	}
-	
-	public GridListener(GridLabelGroup s, GridLabelGroup t) {
-		this(s, t, null);
+		this(null, null, null);
 	}
 	
 	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid) {
+		this(s, t, grid, null, 0);
+	}
+	
+	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid, JTable table, int tableColumn) {
 		sLabelGroup = s;
 		tLabelGroup = t;
 		this.grid = grid;
+		this.table = table;
+		this.tableColumn = tableColumn;
 	}
 	
 	@Override
@@ -33,10 +39,36 @@ public class GridListener extends MouseAdapter {
 			cell.cycleState();
 		
 			if (grid != null) {
+				int x = cell.getGridX();
+				int y = cell.getGridY();
+				
 				if (cell.getState() == CellState.CORRECT) {
-					grid.setGridCell(cell.getGridX(), cell.getGridY(), true);
-				} else {
-					grid.setGridCell(cell.getGridX(), cell.getGridY(), false);
+					
+					grid.setGridCell(x, y, true);
+					
+					GridCellPanel[][] panels = ((GridPanel)cell.getParent()).getCellPanels();
+					
+					for (int i = 0; i < panels.length; ++i) {
+						for (int j = 0; j < panels[i].length; ++j) {
+							//if only the x coordinate or only the y coordinate match
+							if ((!((j == x) && (i == y))) && ((j == x) || (i == y))) {
+								panels[i][j].setState(CellState.INCORRECT);
+								grid.setGridCell(j, i, false);
+							}
+						}
+					}
+					
+					if (table != null) {
+						table.setValueAt(tLabelGroup.getLabels()[x].getText(), y, tableColumn);
+					}
+					
+				}
+				else if (cell.getState() == CellState.EMPTY) {
+					grid.setGridCell(x, y, false);
+					
+					if (table != null) {
+						table.setValueAt("", y, tableColumn);
+					}
 				}
 			}
 		}
