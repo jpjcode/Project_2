@@ -18,7 +18,9 @@ class Answer {
     		grids[i] = new Grid(gridSize, gridSize, new String[] {});
     	}
     }
-    
+    public Answer(Grid[] grids) {
+        this.grids = grids;
+    }
     public Answer(String s) {
     	grids = new Grid[3];
     	Scanner scnr = new Scanner(s);
@@ -42,6 +44,15 @@ class Answer {
 //               grid3.getGridCell(i, j).equals(other.getGrid3().getGridCell(i, j));
 //    }
 
+
+    public Answer compareTo(Answer other) {
+        Grid[] newGrid = new Grid[3];
+        newGrid[0] = grids[0].compareTo(other.grids[0]);
+        newGrid[1] = grids[0].compareTo(other.grids[1]);
+        newGrid[2] = grids[0].compareTo(other.grids[2]);
+        
+        return new Answer(newGrid);
+    }
     public void setGrid(int i, Grid grid) {
         grids[i] = grid;
     }

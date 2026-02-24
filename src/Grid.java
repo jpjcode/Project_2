@@ -11,7 +11,6 @@ public class Grid {
     public Grid() {
         this(4, 4, new String[] {});
     }
-
     public Grid(int width, int height, String[] s) {
 
     	grid = new GridCell[height][width];
@@ -36,6 +35,24 @@ public class Grid {
     			}
     		}
     	}
+    }
+
+    public Grid compareTo(Grid other) {
+        Grid grid = new Grid();
+
+        for (int w = 0; w < grid.getGridWidth(); w++) {
+            for(int h = 0; h < grid.getGridHeight(); h++) {
+                other.getGridCell(w, h);
+                if(other.getGridCell(w, h).equals(getGridCell(w, h))) {
+                    grid.setGridCell(w, h, true);
+                }
+                else {
+                    grid.setGridCell(w, h, false);
+                }
+            }
+            
+        }
+        return grid;
     }
 
     public GridCell getGridCell(int w, int h) {
