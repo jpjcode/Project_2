@@ -1,10 +1,10 @@
-testCategory_1,testCategory_2,testCategory_3,
-testCandidate1_1,testCandidate1_2,testCandidate1_3,testCandidate1_4
-testCandidate2_1,testCandidate2_2,testCandidate2_3,testCandidate2_4
-testCandidate3_1,testCandidate3_2,testCandidate3_3,testCandidate3_4
-testClue_1,testClue_2,testClue_3,
-testStory,,,
+Names,Crimes,Sentenced
+5 years,7 years,9 years,Life in Prison
+Brendon Small,Norville Rogers,Frida Suarez,Aunt Jebidisa
+Embezzlement,Identity Theft,Possession with intent to Distribute,Arson
+Embezzlement serves a longer time than Identity Theft,Norville Rogers is serving less time than Aunt Jebidisa,Brendon's sentence is either the one that serves 9 years or Arson,Frida doesnot have to serve Life in Prison,Frida is serving less time than Brendon Small.
+You're the new prison guard who's first job is to take in the new convicts and figure out what crimes they've committed. Match each convict to their respective crimes.,,,
 4,,,
-0,1,2,3
-0,1,2,3
-0,1,2,3
+2,1,3,0
+1,0,2,3
+1,2,3,0

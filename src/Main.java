@@ -13,7 +13,7 @@ class Main {
 		File infoFile = new File("C:\\Users\\Larra\\Desktop\\CS225\\Project_2\\src\\puzzle1.csv");
 		PuzzleInfo info = new PuzzleInfo(infoFile);
 
-		JFrame frame = new JFrame();
+		JFrame frame = new JFrame("Logic Puzzle");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout(4, 0));
 		JPanel leftPanel =  new JPanel(new BorderLayout());

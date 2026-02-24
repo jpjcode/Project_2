@@ -1,7 +1,7 @@
-import java.util.Scanner;
-
 //Jonathan Joseph
 //edited by Andrew Larrazabal and Lior Sapir
+
+import java.util.Scanner;
 
 class Answer {
 
