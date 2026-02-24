@@ -40,8 +40,5 @@ class Main {
 
 		Controller controller = new Controller(p, t, frame);
 
-		
-
-
     }
 }

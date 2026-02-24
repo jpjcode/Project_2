@@ -28,12 +28,6 @@ public class PuzzleInfo {
 
         clues = fileReader.nextLine().split(",");
         story = fileReader.nextLine();
-
-        //FIXME: Debugging PuzzleInfo file
-        System.out.println("Categories: " + Arrays.toString(categories) + 
-                         "\nCandidates: " + Arrays.deepToString(candidates) + 
-                         "\nClues: " + Arrays.toString(clues) + 
-                         "\nStory: " + story);
     }
 
     public String[] getCategories() {
@@ -52,5 +46,55 @@ public class PuzzleInfo {
         return story;
     }
 
-    
+    public boolean equals(PuzzleInfo other) {
+        String[] otherCategories = other.getCategories();
+        String[][] otherCandidates = other.getCandidates();
+        String[] otherClues = other.getClues();
+        String otherStory = other.getStory();
+
+        //Check if all the length of the arrays are the same
+        if (categories.length != otherCategories.length ||
+            candidates.length != otherCandidates.length || candidates[0].length != otherCandidates[0].length ||
+            clues.length != otherClues.length) {
+                return false;
+        }
+
+        //Check if categories are the same
+        for (int i = 0; i < categories.length; i++) {
+            if (!categories[i].equals(otherCategories[i])) {
+                return false;
+            }
+        }
+
+        //Check if candidates are the same
+        for (int i = 0; i < candidates.length; i++) {
+            for (int j = 0; j < candidates[0].length; j++) {
+                if (!candidates[i][j].equals(otherCandidates[i][j])) {
+                    return false;
+                }
+            }
+        }
+
+        //Check if clues are the same
+        for (int i = 0; i < clues.length; i++) {
+            if (!clues[i].equals(otherClues[i])) {
+                return false;
+            }
+        }
+
+        //Check if stories are the same and return
+        return story.equals(otherStory);
+    } 
+
+    @Override
+    public String toString() {
+        String s = "";
+
+        s += "Categories: " + Arrays.toString(categories) + 
+                         "\nCandidates: " + Arrays.deepToString(candidates) + 
+                         "\nClues: " + Arrays.toString(clues) + 
+                         "\nStory: " + story;
+
+        return s;
+    }
 }
