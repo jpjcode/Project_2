@@ -27,7 +27,7 @@ public class PuzzleInfo {
         }
 
         clues = fileReader.nextLine().split(",");
-        story = fileReader.nextLine();
+        story = fileReader.nextLine().replaceAll(",", "");
         
         String answerStr = "";
         
