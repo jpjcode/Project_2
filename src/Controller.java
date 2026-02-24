@@ -65,6 +65,7 @@ public class Controller extends JPanel implements ActionListener {
         }
         else if (e.getActionCommand().equals("hint")) {
         	System.out.println(e);
+        	
         	Grid testGrid = userAnswer.getGrids()[0];
         	
         	for (int i = 0; i < testGrid.getGridHeight(); i++) {
@@ -79,6 +80,17 @@ public class Controller extends JPanel implements ActionListener {
         }
         else if (e.getActionCommand().equals("start_over")) {
         	System.out.println(e);
+        	
+        	for (int i = 0; i < correctAnswer.getGrids().length; ++i) {
+        		Grid testGrid = correctAnswer.getGrids()[i];
+        		for (int j = 0; j < testGrid.getGridHeight(); j++) {
+        			for (int k=0; k < testGrid.getGridWidth(); k++) {
+        				System.out.print(testGrid.getGridCell(k, j).getState());
+        			}
+        			System.out.println();
+        		}
+        		System.out.println();
+        	}
         }
         else if (e.getActionCommand().equals("submit")) {
         	System.out.println(e);
