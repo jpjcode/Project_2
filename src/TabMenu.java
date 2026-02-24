@@ -65,7 +65,7 @@ public class TabMenu extends JTabbedPane {
 				
 		JTextArea notesTextArea = new JTextArea();
 		notesTextArea.setBackground(NOTES_GREY);
-		notesTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		notesTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		notesTextArea.setLineWrap(true);
 		notesTextArea.setWrapStyleWord(true);
 		
@@ -97,8 +97,17 @@ public class TabMenu extends JTabbedPane {
 			
 			String[][] candidates = new String[info.getCandidates()[0].length][info.getCategories().length];
 			for (int i = 0; i < candidates.length; ++i) {
-				candidates[i][0] = info.getCandidates()[0][i];
+				
+				for (int j = 0; j < candidates[i].length; ++j) {
+					if (j == 0) {
+						candidates[i][j] = info.getCandidates()[j][i];
+					}
+					else {
+						candidates[i][j] = "";
+					}
+				}
 			}
+			
 			answerTable = new JTable(candidates, info.getCategories());
 			answerTable.setEnabled(false);
 			answerTable.getTableHeader().setBackground(ANSWER_TABLE_GREY);

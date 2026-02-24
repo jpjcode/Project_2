@@ -8,11 +8,12 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 public class Controller extends JPanel implements ActionListener {
 
     private PuzzleUI puzzleUI;
-    private TabMenu tabMenu;
+    private JTable table;
     private Answer correctAnswer;
     
     private Answer userAnswer;
@@ -22,15 +23,21 @@ public class Controller extends JPanel implements ActionListener {
     	setBackground(Color.WHITE);
     	
         this.puzzleUI = puzzleUI;
-        this.tabMenu = tabMenu;
+        this.table = tabMenu.getAnswerTable();
         this.correctAnswer = info.getAnswer();
         
         this.userAnswer = new Answer();
         this.gridListeners = new GridListener[correctAnswer.getGrids().length];
         
-        GridLabelGroup[][] labels = puzzleUI.getGridLabelGroupPairs();
-        for (int i = 0; i < labels.length; ++i) {
-        	puzzleUI.getGridPanels()[i].addGridListener(new GridListener(labels[i][0], labels[i][1], userAnswer.getGrids()[i]));
+        GridLabelGroup[][] labelPairs = puzzleUI.getGridLabelGroupPairs();
+        
+        for (int i = 0; i < table.getColumnCount() - 1; ++i) {
+        	gridListeners[i] = new GridListener(labelPairs[i][0], labelPairs[i][1], userAnswer.getGrids()[i], table, i + 1);
+        	puzzleUI.getGridPanels()[i].addGridListener(gridListeners[i]);
+        }
+        for (int i = table.getColumnCount() - 1; i < labelPairs.length; ++i) {
+        	gridListeners[i] = new GridListener(labelPairs[i][0], labelPairs[i][1], userAnswer.getGrids()[i]);
+        	puzzleUI.getGridPanels()[i].addGridListener(gridListeners[i]);
         }
 
         JButton undo = new JButton("Undo");
@@ -62,35 +69,26 @@ public class Controller extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("undo")) {
             System.out.println(e);
+        	
+        	for (int i = 0; i < correctAnswer.getGrids().length; ++i) {
+        		Grid grid = correctAnswer.getGrids()[i];
+        		for (int j = 0; j < grid.getGridHeight(); j++) {
+        			for (int k=0; k < grid.getGridWidth(); k++) {
+        				System.out.print(grid.getGridCell(k, j).getState());
+        			}
+        			System.out.println();
+        		}
+        		System.out.println();
+        	}
         }
         else if (e.getActionCommand().equals("hint")) {
         	System.out.println(e);
-        	
-        	Grid testGrid = userAnswer.getGrids()[0];
-        	
-        	for (int i = 0; i < testGrid.getGridHeight(); i++) {
-    			for (int j=0; j < testGrid.getGridWidth(); j++) {
-    				System.out.print(testGrid.getGridCell(j, i).getState());
-    			}
-    			System.out.println();
-    		}
         }
         else if (e.getActionCommand().equals("clear_errors")) {
         	System.out.println(e);
         }
         else if (e.getActionCommand().equals("start_over")) {
         	System.out.println(e);
-        	
-        	for (int i = 0; i < correctAnswer.getGrids().length; ++i) {
-        		Grid testGrid = correctAnswer.getGrids()[i];
-        		for (int j = 0; j < testGrid.getGridHeight(); j++) {
-        			for (int k=0; k < testGrid.getGridWidth(); k++) {
-        				System.out.print(testGrid.getGridCell(k, j).getState());
-        			}
-        			System.out.println();
-        		}
-        		System.out.println();
-        	}
         }
         else if (e.getActionCommand().equals("submit")) {
         	System.out.println(e);
