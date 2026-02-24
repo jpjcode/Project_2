@@ -1,34 +1,31 @@
 //Lior Sapir
 //edited by Andrew Larrazabal
 //edited by Jonathan Joseph
+
 import java.awt.*;
 import javax.swing.*;
 
 public class PuzzleUI extends JPanel {
 	public static final int MIN_GRID_SIZE = 132;
 	public static final int MIN_CELL_SIZE = 23;
-	
-	private int cellSize;
-	private int gridSize;
 
 	private GridLabelGroup lt1;
-	private GridLabelGroup ls1;
-
 	private GridLabelGroup lt2;
+	
+	private GridLabelGroup ls1;
 	private GridLabelGroup ls2;
-
-	private GridPanel grid;
+	
+	private GridPanel grid1;
 	private GridPanel grid2;
 	private GridPanel grid3;
-	
 	
 	public PuzzleUI() {
 		this(4);
 	}
 	
 	public PuzzleUI(int numCandidates) {	
-		cellSize = (MIN_GRID_SIZE / numCandidates < MIN_CELL_SIZE) ? MIN_CELL_SIZE : MIN_GRID_SIZE / numCandidates;
-		gridSize = cellSize * numCandidates;
+		int cellSize = (MIN_GRID_SIZE / numCandidates < MIN_CELL_SIZE) ? MIN_CELL_SIZE : MIN_GRID_SIZE / numCandidates;
+		int gridSize = cellSize * numCandidates;
 		
 		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(gridSize * 3 + 4 * 6, gridSize * 3 + 4 * 6));
@@ -43,28 +40,23 @@ public class PuzzleUI extends JPanel {
 		pEmpty.setPreferredSize(new Dimension(gridSize, gridSize));
 		pEmpty2.setPreferredSize(new Dimension(gridSize, gridSize));
 		
-		//FIXME:placeholder
 		String[] text = new String[numCandidates];
 		
 		for (int i = 0; i < numCandidates; ++i) {
-			text[i] = "label" + (i + 1);
+			text[i] = "";
 		}
 		
 		//grid labels
 		lt1 = new GridLabelGroup(text, gridSize, true);
-		ls1 = new GridLabelGroup(text, gridSize, false);
-		
 		lt2 = new GridLabelGroup(text, gridSize, true);
+		
+		ls1 = new GridLabelGroup(text, gridSize, false);
 		ls2 = new GridLabelGroup(text, gridSize, false);
 		
 		//grids
-		grid = new GridPanel(numCandidates, gridSize);
+		grid1 = new GridPanel(numCandidates, gridSize);
 		grid2 = new GridPanel(numCandidates, gridSize);
 		grid3 = new GridPanel(numCandidates, gridSize);
-		
-		grid.addGridListener(new GridListener(ls1, lt1));
-		grid2.addGridListener(new GridListener(ls1, lt2));
-		grid3.addGridListener(new GridListener(ls2, lt1));
 		
 		//add components into panel
 		//row 1
@@ -74,7 +66,7 @@ public class PuzzleUI extends JPanel {
 		
 		//row 2
 		add(ls1);
-		add(grid);
+		add(grid1);
 		add(grid2);
 		
 		//row 3
@@ -84,10 +76,9 @@ public class PuzzleUI extends JPanel {
 	}
 
 	public PuzzleUI(PuzzleInfo info) {
-
 		int numCandidates = info.getCandidates()[0].length;
-		cellSize = (MIN_GRID_SIZE / numCandidates < MIN_CELL_SIZE) ? MIN_CELL_SIZE : MIN_GRID_SIZE / numCandidates;
-		gridSize = cellSize * numCandidates;
+		int cellSize = (MIN_GRID_SIZE / numCandidates < MIN_CELL_SIZE) ? MIN_CELL_SIZE : MIN_GRID_SIZE / numCandidates;
+		int gridSize = cellSize * numCandidates;
 		
 		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(gridSize * 3 + 4 * 6, gridSize * 3 + 4 * 6));
@@ -102,28 +93,17 @@ public class PuzzleUI extends JPanel {
 		pEmpty.setPreferredSize(new Dimension(gridSize, gridSize));
 		pEmpty2.setPreferredSize(new Dimension(gridSize, gridSize));
 		
-		//FIXME:placeholder
-		String[] text = new String[numCandidates];
-		
-		for (int i = 0; i < numCandidates; ++i) {
-			text[i] = "label" + (i + 1);
-		}
-		
 		//grid labels
 		lt1 = new GridLabelGroup(info.getCandidates()[1], gridSize, true);
-		ls1 = new GridLabelGroup(info.getCandidates()[2], gridSize, false);
-		
 		lt2 = new GridLabelGroup(info.getCandidates()[0], gridSize, true);
+		
+		ls1 = new GridLabelGroup(info.getCandidates()[2], gridSize, false);
 		ls2 = new GridLabelGroup(info.getCandidates()[2], gridSize, false);
 		
 		//grids
-		grid = new GridPanel(numCandidates, gridSize);
+		grid1 = new GridPanel(numCandidates, gridSize);
 		grid2 = new GridPanel(numCandidates, gridSize);
 		grid3 = new GridPanel(numCandidates, gridSize);
-		
-		grid.addGridListener(new GridListener(ls1, lt1));
-		grid2.addGridListener(new GridListener(ls1, lt2));
-		grid3.addGridListener(new GridListener(ls2, lt1));
 		
 		//add components into panel
 		//row 1
@@ -133,7 +113,7 @@ public class PuzzleUI extends JPanel {
 		
 		//row 2
 		add(ls1);
-		add(grid);
+		add(grid1);
 		add(grid2);
 		
 		//row 3
@@ -141,6 +121,15 @@ public class PuzzleUI extends JPanel {
 		add(grid3);
 		add(pEmpty2);
 	}
+	
+	public GridLabelGroup[][] getGridLabelGroupPairs() {
+		return new GridLabelGroup[][] {{ls1, lt1}, {ls1, lt2}, {ls2, lt1}};
+	}
+	
+	public GridPanel[] getGridPanels() {
+		return new GridPanel[] {grid1, grid2, grid3};
+	}
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

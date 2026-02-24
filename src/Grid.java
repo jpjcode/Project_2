@@ -5,31 +5,37 @@
 
 //Grid class to set up the logic puzzle
 
-import java.util.Scanner;
-
 public class Grid {
     private GridCell[][] grid;
 
     public Grid() {
-        this(4, 4, "");
+        this(4, 4, new String[] {});
     }
 
-    public Grid(int width, int height, String s) {
+    public Grid(int width, int height, String[] s) {
 
-        Scanner scnr = new Scanner(s);
-        grid = new GridCell[height][width];
+    	grid = new GridCell[height][width];
 
-        for (int i = 0; i < height; i++) {
-            int correctCell = scnr.nextInt();
+    	if (s.length != 0) {
+    		for (int i = 0; i < height; i++) {
+    			int correctCell = Integer.parseInt(s[i]);
 
-            for (int j = 0; j < width; j++) {
-                if (correctCell == j) {
-                    grid[i][j] = new GridCell(true);
-                } else {
-                    grid[i][j] = new GridCell();
-                }
-            }
-        }
+    			for (int j = 0; j < width; j++) {
+    				if (correctCell == j) {
+    					grid[i][j] = new GridCell(true);
+    				} else {
+    					grid[i][j] = new GridCell();
+    				}
+    			}
+    		}
+    	}
+    	else {
+    		for (int i = 0; i < height; i++) {
+    			for (int j = 0; j < width; j++) {
+    				grid[i][j] = new GridCell();
+    			}
+    		}
+    	}
     }
 
     public GridCell getGridCell(int w, int h) {

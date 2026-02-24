@@ -10,7 +10,7 @@ public class PuzzleInfo {
     private String[][] candidates;
     private String[] clues;
     private String story;
-    private Answer correction;
+    private Answer answer;
 
     public PuzzleInfo() throws FileNotFoundException {
         this(null);
@@ -28,6 +28,16 @@ public class PuzzleInfo {
 
         clues = fileReader.nextLine().split(",");
         story = fileReader.nextLine();
+        
+        String answerStr = "";
+        
+        while(fileReader.hasNextLine()) {
+        	answerStr += fileReader.nextLine() + "\n";
+        }
+        
+        answer = new Answer(answerStr);
+        
+        fileReader.close();
     }
 
     public String[] getCategories() {
@@ -45,12 +55,17 @@ public class PuzzleInfo {
     public String getStory() {
         return story;
     }
+    
+    public Answer getAnswer() {
+    	return answer;
+    }
 
     public boolean equals(PuzzleInfo other) {
         String[] otherCategories = other.getCategories();
         String[][] otherCandidates = other.getCandidates();
         String[] otherClues = other.getClues();
         String otherStory = other.getStory();
+        Answer otherAnswer = other.getAnswer();
 
         //Check if all the length of the arrays are the same
         if (categories.length != otherCategories.length ||
@@ -82,8 +97,13 @@ public class PuzzleInfo {
             }
         }
 
-        //Check if stories are the same and return
-        return story.equals(otherStory);
+        //Check if stories are the same
+        if (!(story.equals(otherStory))) {
+        	return false;
+        }
+        
+        //Check if answers are the same and return
+        return answer.equals(otherAnswer);
     } 
 
     @Override
@@ -94,7 +114,7 @@ public class PuzzleInfo {
                          "\nCandidates: " + Arrays.deepToString(candidates) + 
                          "\nClues: " + Arrays.toString(clues) + 
                          "\nStory: " + story;
-
+//FIXME: add answer
         return s;
     }
 }
