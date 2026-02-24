@@ -2,9 +2,13 @@
 //Edited by Andrew Larrazabal and Lior Sapir
 
 import java.awt.FlowLayout;
+import java.awt.Desktop.Action;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 class Main {
@@ -29,7 +33,10 @@ class Main {
 		frame.add(p);
 		frame.add(t);		
 		frame.pack();
-		frame.setVisible(true);	
+		frame.setVisible(true);
+
+		JButton test = new JButton();
+		
 
 
     }

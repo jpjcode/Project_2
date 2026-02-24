@@ -10,6 +10,17 @@ public class PuzzleUI extends JPanel {
 	
 	private int cellSize;
 	private int gridSize;
+
+	private GridLabelGroup lt1;
+	private GridLabelGroup ls1;
+
+	private GridLabelGroup lt2;
+	private GridLabelGroup ls2;
+
+	private GridPanel grid;
+	private GridPanel grid2;
+	private GridPanel grid3;
+	
 	
 	public PuzzleUI() {
 		this(4);
@@ -40,16 +51,16 @@ public class PuzzleUI extends JPanel {
 		}
 		
 		//grid labels
-		GridLabelGroup lt1 = new GridLabelGroup(text, gridSize, true);
-		GridLabelGroup ls1 = new GridLabelGroup(text, gridSize, false);
+		lt1 = new GridLabelGroup(text, gridSize, true);
+		ls1 = new GridLabelGroup(text, gridSize, false);
 		
-		GridLabelGroup lt2 = new GridLabelGroup(text, gridSize, true);
-		GridLabelGroup ls2 = new GridLabelGroup(text, gridSize, false);
+		lt2 = new GridLabelGroup(text, gridSize, true);
+		ls2 = new GridLabelGroup(text, gridSize, false);
 		
 		//grids
-		GridPanel grid = new GridPanel(numCandidates, gridSize);
-		GridPanel grid2 = new GridPanel(numCandidates, gridSize);
-		GridPanel grid3 = new GridPanel(numCandidates, gridSize);
+		grid = new GridPanel(numCandidates, gridSize);
+		grid2 = new GridPanel(numCandidates, gridSize);
+		grid3 = new GridPanel(numCandidates, gridSize);
 		
 		grid.addGridListener(new GridListener(ls1, lt1));
 		grid2.addGridListener(new GridListener(ls1, lt2));
@@ -99,16 +110,16 @@ public class PuzzleUI extends JPanel {
 		}
 		
 		//grid labels
-		GridLabelGroup lt1 = new GridLabelGroup(info.getCandidates()[1], gridSize, true);
-		GridLabelGroup ls1 = new GridLabelGroup(info.getCandidates()[2], gridSize, false);
+		lt1 = new GridLabelGroup(info.getCandidates()[1], gridSize, true);
+		ls1 = new GridLabelGroup(info.getCandidates()[2], gridSize, false);
 		
-		GridLabelGroup lt2 = new GridLabelGroup(info.getCandidates()[0], gridSize, true);
-		GridLabelGroup ls2 = new GridLabelGroup(info.getCandidates()[2], gridSize, false);
+		lt2 = new GridLabelGroup(info.getCandidates()[0], gridSize, true);
+		ls2 = new GridLabelGroup(info.getCandidates()[2], gridSize, false);
 		
 		//grids
-		GridPanel grid = new GridPanel(numCandidates, gridSize);
-		GridPanel grid2 = new GridPanel(numCandidates, gridSize);
-		GridPanel grid3 = new GridPanel(numCandidates, gridSize);
+		grid = new GridPanel(numCandidates, gridSize);
+		grid2 = new GridPanel(numCandidates, gridSize);
+		grid3 = new GridPanel(numCandidates, gridSize);
 		
 		grid.addGridListener(new GridListener(ls1, lt1));
 		grid2.addGridListener(new GridListener(ls1, lt2));
