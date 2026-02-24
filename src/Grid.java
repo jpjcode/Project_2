@@ -10,7 +10,7 @@ public class Grid {
 
     public Grid() {
         this(4, 4, new String[] {});
-    }
+    } 
     public Grid(int width, int height, String[] s) {
 
     	grid = new GridCell[height][width];
