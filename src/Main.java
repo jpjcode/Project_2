@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 class Main {
     public static void main(String[] args) throws FileNotFoundException {
-		File infoFile = new File("C:\\Users\\Larra\\Desktop\\CS225\\Project_2\\src\\puzzle1.csv");
+		File infoFile = new File("src\\puzzle1.csv");
 		PuzzleInfo info = new PuzzleInfo(infoFile);
 		Grid testGrid = new Grid(4, 4, "3 2 1 0");
 
@@ -24,7 +24,7 @@ class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
 		
-		PuzzleUI p = new PuzzleUI(4);
+		PuzzleUI p = new PuzzleUI(info);
 		TabMenu t = new TabMenu();
 		frame.add(p);
 		frame.add(t);		

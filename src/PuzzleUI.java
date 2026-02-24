@@ -71,7 +71,65 @@ public class PuzzleUI extends JPanel {
 		add(grid3);
 		add(pEmpty2);
 	}
-	
+
+	public PuzzleUI(PuzzleInfo info) {
+
+		int numCandidates = info.getCandidates()[0].length;
+		cellSize = (MIN_GRID_SIZE / numCandidates < MIN_CELL_SIZE) ? MIN_CELL_SIZE : MIN_GRID_SIZE / numCandidates;
+		gridSize = cellSize * numCandidates;
+		
+		setBackground(Color.WHITE);
+		setPreferredSize(new Dimension(gridSize * 3 + 4 * 6, gridSize * 3 + 4 * 6));
+		setLayout(new FlowLayout(FlowLayout.CENTER, 4, 4));
+		setBorder(BorderFactory.createEmptyBorder(4, 0, 0, 0));
+		
+		//empty panels to fill space
+		JPanel pEmpty = new JPanel();
+		JPanel pEmpty2 = new JPanel();
+		pEmpty.setBackground(getBackground());
+		pEmpty2.setBackground(getBackground());
+		pEmpty.setPreferredSize(new Dimension(gridSize, gridSize));
+		pEmpty2.setPreferredSize(new Dimension(gridSize, gridSize));
+		
+		//FIXME:placeholder
+		String[] text = new String[numCandidates];
+		
+		for (int i = 0; i < numCandidates; ++i) {
+			text[i] = "label" + (i + 1);
+		}
+		
+		//grid labels
+		GridLabelGroup lt1 = new GridLabelGroup(info.getCandidates()[1], gridSize, true);
+		GridLabelGroup ls1 = new GridLabelGroup(info.getCandidates()[2], gridSize, false);
+		
+		GridLabelGroup lt2 = new GridLabelGroup(info.getCandidates()[0], gridSize, true);
+		GridLabelGroup ls2 = new GridLabelGroup(info.getCandidates()[2], gridSize, false);
+		
+		//grids
+		GridPanel grid = new GridPanel(numCandidates, gridSize);
+		GridPanel grid2 = new GridPanel(numCandidates, gridSize);
+		GridPanel grid3 = new GridPanel(numCandidates, gridSize);
+		
+		grid.addGridListener(new GridListener(ls1, lt1));
+		grid2.addGridListener(new GridListener(ls1, lt2));
+		grid3.addGridListener(new GridListener(ls2, lt1));
+		
+		//add components into panel
+		//row 1
+		add(pEmpty);
+		add(lt1);
+		add(lt2);
+		
+		//row 2
+		add(ls1);
+		add(grid);
+		add(grid2);
+		
+		//row 3
+		add(ls2);	
+		add(grid3);
+		add(pEmpty2);
+	}
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
