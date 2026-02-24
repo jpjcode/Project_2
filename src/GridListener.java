@@ -11,21 +11,23 @@ public class GridListener extends MouseAdapter {
 	private GridLabelGroup sLabelGroup;
 	private GridLabelGroup tLabelGroup;
 	private Grid grid;
+	private ActionTracker actionTracker;
 	private JTable table;
 	private int tableColumn;
 	
 	public GridListener() {
-		this(null, null, null);
+		this(null, null, null, null);
 	}
 	
-	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid) {
-		this(s, t, grid, null, 0);
+	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid, ActionTracker h) {
+		this(s, t, grid, h, null, 0);
 	}
 	
-	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid, JTable table, int tableColumn) {
+	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid, ActionTracker h, JTable table, int tableColumn) {
 		sLabelGroup = s;
 		tLabelGroup = t;
 		this.grid = grid;
+		actionTracker = h;
 		this.table = table;
 		this.tableColumn = tableColumn;
 	}
@@ -36,6 +38,7 @@ public class GridListener extends MouseAdapter {
 		
 		//this if statement just prevents the state change if the user clicked on the component but released the mouse outside the component
 		if (cell.isHovering()) {
+			actionTracker.addAction(this, cell, cell.getState());
 			cell.cycleState();
 		
 			if (grid != null) {
@@ -99,4 +102,24 @@ public class GridListener extends MouseAdapter {
 			tLabelGroup.getLabels()[cell.getGridX()].setHighlighted(false);
 		}
 	}
+	
+	public GridLabelGroup getSLabelGroup() {
+		return sLabelGroup;
+	}
+	
+	public GridLabelGroup getTLabelGroup() {
+		return tLabelGroup;
+	}
+	
+	public Grid getGrid() {
+		return grid;
+	}
+	
+	public boolean editsTable() {
+		return !(table == null);
+	}
+	public int getTableColumn() {
+		return tableColumn;
+	}
+	
 }
