@@ -1,6 +1,6 @@
 //Lior Sapir
 //edited by Andrew Larrazabal
-
+//edited by Jonathan Joseph
 import java.awt.*;
 import javax.swing.*;
 

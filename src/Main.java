@@ -30,12 +30,16 @@ class Main {
 		
 		PuzzleUI p = new PuzzleUI(info);
 		TabMenu t = new TabMenu();
+
+		/* 
 		frame.add(p);
 		frame.add(t);		
 		frame.pack();
 		frame.setVisible(true);
+		*/
 
-		JButton test = new JButton();
+		Controller controller = new Controller(p, t, frame);
+
 		
 
 
