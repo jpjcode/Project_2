@@ -24,8 +24,8 @@ public class GridPanel extends JPanel {
 		for (int i = 0; i < numCandidates; ++i) {
 			for (int j = 0; j < numCandidates; ++j) {
 				
-				panels[i * 4 + j] = new GridCellPanel(cellSize, j, i);
-				add(panels[i * 4 + j]);
+				panels[i * numCandidates + j] = new GridCellPanel(cellSize, j, i);
+				add(panels[i * numCandidates + j]);
 			}
 		}
 	}
