@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  */
 class Main {
     public static void main(String[] args) throws FileNotFoundException {
-		File infoFile = new File("src\\puzzle1.csv");
+		File infoFile = new File(System.getProperty("user.dir") + "\\puzzle1.csv");
 		PuzzleInfo info = new PuzzleInfo(infoFile);
 
 		JFrame frame = new JFrame("Logic Puzzle");
