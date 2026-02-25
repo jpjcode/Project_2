@@ -72,7 +72,7 @@ public class Controller extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("undo")) {
-        	
+        	//use action tracker to undo recent actions
             if (!actionTracker.isEmpty()) {
             	GridListener l = actionTracker.getLastAction().getGridListener();
             	GridCellPanel cell = actionTracker.getLastAction().getCell();
@@ -123,9 +123,58 @@ public class Controller extends JPanel implements ActionListener {
 				}	
         	}
         	
+        	//FIXME: debugging
+        	for (int i = 0; i < correctAnswer.getGrids().length; ++i) {
+        		Grid grid = correctAnswer.getGrids()[i];
+        		for (int j = 0; j < grid.getGridHeight(); j++) {
+        			for (int k=0; k < grid.getGridWidth(); k++) {
+        				System.out.print(grid.getGridCell(k, j).getState());
+        			}
+        			System.out.println();
+        		}
+        		System.out.println();
+        	}
+        	
+        	System.out.println("user answer");
+        	for (int i = 0; i < userAnswer.getGrids().length; ++i) {
+        		Grid grid = userAnswer.getGrids()[i];
+        		for (int j = 0; j < grid.getGridHeight(); j++) {
+        			for (int k=0; k < grid.getGridWidth(); k++) {
+        				System.out.print(grid.getGridCell(k, j).getState());
+        			}
+        			System.out.println();
+        		}
+        		System.out.println();
+        	}
         }
         else if (e.getActionCommand().equals("clear_errors")) {
-        	System.out.println(e);
+        	//clear errors on grid
+        	Answer cellsToClear = userAnswer.compareTo(correctAnswer);
+        	
+        	for (int i = 0; i < userAnswer.getGrids().length; ++i) {
+        		Grid grid = userAnswer.getGrids()[i];
+        		Grid clearGrid = cellsToClear.getGrids()[i];
+        		
+        		for (int j = 0; j < grid.getGridHeight(); j++) {
+        			for (int k=0; k < grid.getGridWidth(); k++) {
+        				
+        				if (!(clearGrid.getGridCell(k, j).getState()) && (grid.getGridCell(k, j).getState())) {
+        					puzzleUI.getGridPanels()[i].getCellPanels()[j][k].setState(CellState.EMPTY);
+        					puzzleUI.getGridPanels()[i].getCellPanels()[j][k].setBackground(GridCellPanel.ERROR_RED);
+            				grid.setGridCell(k, j, false);
+            				
+            				if (i < 2) {
+            					table.setValueAt("", j, i + 1);
+            				}
+        				}
+        				else if (!(clearGrid.getGridCell(k, j).getState()) && (puzzleUI.getGridPanels()[i].getCellPanels()[j][k].getState() == CellState.INCORRECT)) {
+        					puzzleUI.getGridPanels()[i].getCellPanels()[j][k].setState(CellState.EMPTY);
+        					puzzleUI.getGridPanels()[i].getCellPanels()[j][k].setBackground(GridCellPanel.ERROR_RED);
+        				}
+        				
+        			}
+        		}
+        	}
         	
         	actionTracker.clear();
         }
@@ -154,29 +203,12 @@ public class Controller extends JPanel implements ActionListener {
         	
         }
         else if (e.getActionCommand().equals("submit")) {
-        	System.out.println(e);
         	
-        	for (int i = 0; i < correctAnswer.getGrids().length; ++i) {
-        		Grid grid = correctAnswer.getGrids()[i];
-        		for (int j = 0; j < grid.getGridHeight(); j++) {
-        			for (int k=0; k < grid.getGridWidth(); k++) {
-        				System.out.print(grid.getGridCell(k, j).getState());
-        			}
-        			System.out.println();
-        		}
-        		System.out.println();
+        	if (!(userAnswer.equals(correctAnswer))) {
+        		setBackground(Color.RED);
         	}
-        	
-        	System.out.println("user answer");
-        	for (int i = 0; i < userAnswer.getGrids().length; ++i) {
-        		Grid grid = userAnswer.getGrids()[i];
-        		for (int j = 0; j < grid.getGridHeight(); j++) {
-        			for (int k=0; k < grid.getGridWidth(); k++) {
-        				System.out.print(grid.getGridCell(k, j).getState());
-        			}
-        			System.out.println();
-        		}
-        		System.out.println();
+        	else {
+        		setBackground(Color.GREEN);
         	}
         }
 	}

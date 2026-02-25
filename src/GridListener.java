@@ -52,9 +52,14 @@ public class GridListener extends MouseAdapter {
 					GridCellPanel[][] panels = ((GridPanel)cell.getParent()).getCellPanels();
 					
 					for (int i = 0; i < panels.length; ++i) {
+						
 						for (int j = 0; j < panels[i].length; ++j) {
 							//if only the x coordinate or only the y coordinate match
 							if ((!((j == x) && (i == y))) && ((j == x) || (i == y))) {
+								if (table != null && grid.getGridCell(j, i).getState() == true) {
+									table.setValueAt("", i, tableColumn);
+								}
+								
 								panels[i][j].setState(CellState.INCORRECT);
 								grid.setGridCell(j, i, false);
 							}

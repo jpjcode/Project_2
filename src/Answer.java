@@ -33,26 +33,15 @@ class Answer {
     	scnr.close();
     }
 
-//    public boolean compareCell(Answer other, int i, int j) {
-//    	
-    //FIXME: change this method to compare individual cells, not the same cell on
-    //all grids. A more useful method would be CompareAnswer which would somehow
-    //return information on what cells are wrong rather than just true or false
-//    	
-//        return grid.getGridCell(i, j).equals(other.getGrid().getGridCell(i, j)) &&
-//               grid2.getGridCell(i, j).equals(other.getGrid2().getGridCell(i, j)) &&
-//               grid3.getGridCell(i, j).equals(other.getGrid3().getGridCell(i, j));
-//    }
-
-
     public Answer compareTo(Answer other) {
         Grid[] newGrid = new Grid[3];
-        newGrid[0] = grids[0].compareTo(other.grids[0]);
-        newGrid[1] = grids[0].compareTo(other.grids[1]);
-        newGrid[2] = grids[0].compareTo(other.grids[2]);
         
+        for(int i = 0; i < grids.length; ++i) {
+        	newGrid[i] = grids[i].compareTo(other.grids[i]);
+        }
         return new Answer(newGrid);
     }
+    
     public void setGrid(int i, Grid grid) {
         grids[i] = grid;
     }
@@ -61,9 +50,22 @@ class Answer {
         return grids;
     }
 
-    
-    //FIXME: add equals method
-    //FIXME: add compareAnswer method which will be used to check answer correctness
+    @Override
+    public boolean equals(Object obj) {
+    	if (!(obj instanceof Answer)) {
+    		return false;
+    	}
+    	
+    	Answer other = (Answer)obj;
+
+    	for (int i = 0; i < grids.length; ++i) {
+    		if (!(grids[i].equals(other.getGrids()[i]))) {
+    			return false;
+    		}
+    	}
+    	
+    	return true;
+    }
     
     public String toString() {
         String string = "";

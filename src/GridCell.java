@@ -21,15 +21,19 @@ public class GridCell {
         this.state = state;
     }
     
-    public boolean equals(GridCell other) {
+    @Override
+    public boolean equals(Object obj) {
+    	if (!(obj instanceof GridCell)) {
+    		return false;
+    	}
+    	
+    	GridCell other = (GridCell)obj;
         return state == other.getState();
     }
 
     @Override
     public String toString() {
         String s = "";
-
-        s += "[" + state + "]";
         
        return s;
     }
