@@ -1,26 +1,51 @@
 //Lior Sapir
 
-import javax.swing.*;
 import java.awt.*;
-
+import javax.swing.*;
+/*
+ * GridLabel class represents the labels. It holds a JLabel object as an attribute.
+ * 
+ * @author Lior Sapir
+ * @verison 1.0.0
+ */
 public class GridLabel extends JPanel {
-	
+	/**
+	 * HIGHLIGHT_Blue color
+	 */
 	public static final Color HIGHLIGHT_BLUE = new Color(228, 233, 250);
-	
+	/**
+	 * This is the JLabel object attribute.
+	 */
 	private JLabel text;
-	
+	/**
+	 * Default contructor.
+	 */
 	public GridLabel() {
 		this("");
 	}
-	
+	/**
+	 * 
+	 * @param label
+	 */
 	public GridLabel(String label) {
 		this(label, 33, 132);
 	}
-	
+	/**
+	 * 
+	 * @param label
+	 * @param width
+	 * @param length
+	 */
 	public GridLabel(String label, int width, int length) {
 		this(label, width, length, false);
 	}
-	
+	/**
+	 * Constructors setst he layout with width, length and rather it is sideways.
+	 * @param label
+	 * @param width
+	 * @param length
+	 * @param sideways
+	 */
 	public GridLabel(String label, int width, int length, boolean sideways) {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		

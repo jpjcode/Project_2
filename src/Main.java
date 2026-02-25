@@ -4,13 +4,14 @@
 import java.awt.BorderLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * Main class runs teh whole program.
+ */
 class Main {
     public static void main(String[] args) throws FileNotFoundException {
-		File infoFile = new File("C:\\Users\\Larra\\Desktop\\CS225\\Project_2\\src\\puzzle1.csv");
+		File infoFile = new File("src\\puzzle1.csv");
 		PuzzleInfo info = new PuzzleInfo(infoFile);
 
 		JFrame frame = new JFrame("Logic Puzzle");

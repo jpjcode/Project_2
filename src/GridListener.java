@@ -5,24 +5,57 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JTable;
-
+/**
+ * GridListeners is MouseAdapter that handles the input for each grid cell.
+ */
 public class GridListener extends MouseAdapter {
-	
+	/**
+	 * One of the label groups.
+	 */
 	private GridLabelGroup sLabelGroup;
+	/**
+	 * One of the label groups.
+	 */
 	private GridLabelGroup tLabelGroup;
+	/**
+	 * The grid object it is modifying in real time.
+	 */
 	private Grid grid;
+	/**
+	 * Action Tracker object to keep track of user inputs.
+	 */
 	private ActionTracker actionTracker;
+	/**
+	 * JTable that stores the answers the user made.
+	 */
 	private JTable table;
+	/**
+	 * The side of the table.
+	 */
 	private int tableColumn;
-	
+	/**
+	 * Default constructor that sets all attributes to null.
+	 */
 	public GridListener() {
 		this(null, null, null, null);
 	}
-	
+	/**
+	 * Constructor that recieves the needed objects: GridLabelGroup s, GridLabelGroup t, Grid grid, ActionTracker h, JTable table, int tableColumn
+	 * @param s
+	 * @param t
+	 * @param grid
+	 * @param h
+	 */
 	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid, ActionTracker h) {
 		this(s, t, grid, h, null, 0);
 	}
-	
+	/**
+	 * Constructor that recieves the needed objects: GridLabelGroup s, GridLabelGroup t, Grid grid, ActionTracker h, JTable table, int tableColumn
+	 * @param s
+	 * @param t
+	 * @param grid
+	 * @param h
+	 */
 	public GridListener(GridLabelGroup s, GridLabelGroup t, Grid grid, ActionTracker h, JTable table, int tableColumn) {
 		sLabelGroup = s;
 		tLabelGroup = t;
@@ -107,11 +140,17 @@ public class GridListener extends MouseAdapter {
 			tLabelGroup.getLabels()[cell.getGridX()].setHighlighted(false);
 		}
 	}
-	
+	/**
+	 * Get method for sLabelGroup
+	 * @return
+	 */
 	public GridLabelGroup getSLabelGroup() {
 		return sLabelGroup;
 	}
-	
+	/**
+	 * Get method for tLabelGroup
+	 * @return
+	 */
 	public GridLabelGroup getTLabelGroup() {
 		return tLabelGroup;
 	}

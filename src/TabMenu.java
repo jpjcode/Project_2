@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TabMenu extends JTabbedPane {
-
 	//ATTRIBUTES
 	public static final Color NOTES_GREY = new Color(240, 240, 240);
 	public static final Color ANSWER_TABLE_GREY = new Color(192, 192, 192);
@@ -67,7 +66,7 @@ public class TabMenu extends JTabbedPane {
 				
 		JTextArea notesTextArea = new JTextArea();
 		notesTextArea.setBackground(NOTES_GREY);
-		notesTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		notesTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		notesTextArea.setLineWrap(true);
 		notesTextArea.setWrapStyleWord(true);
 		
@@ -88,7 +87,7 @@ public class TabMenu extends JTabbedPane {
 		addTab("notes", notes);
 		addTab("answers", answers);
 		
-		//Display all the clues, story, notes, and answers in each of their respective tabs
+		//Set up each of the tabs to their respected rolls
 		if (info != null) {
 			String cluesStr = "";
 			for (int i = 0; i < info.getClues().length; ++i) {
@@ -100,18 +99,10 @@ public class TabMenu extends JTabbedPane {
 			
 			String[][] candidates = new String[info.getCandidates()[0].length][info.getCategories().length];
 			for (int i = 0; i < candidates.length; ++i) {
-				
-				for (int j = 0; j < candidates[i].length; ++j) {
-					if (j == 0) {
-						candidates[i][j] = info.getCandidates()[j][i];
-					}
-					else {
-						candidates[i][j] = "";
-					}
-				}
+				candidates[i][0] = info.getCandidates()[0][i];
 			}
-			
-			//Set up Answer Table
+
+			//Set up the Answer table under the Answer tab
 			answerTable = new JTable(candidates, info.getCategories());
 			answerTable.setEnabled(false);
 			answerTable.getTableHeader().setBackground(ANSWER_TABLE_GREY);
@@ -129,14 +120,14 @@ public class TabMenu extends JTabbedPane {
 	
 	//METHODS
 
-	//Set up the Tab Menu Panel
+	//Set up the panels on the tab menu
 	private void setupPanel(JPanel p) {
 		p.setBackground(getBackground());
 		p.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 		p.setLayout(new BorderLayout());
 	}
 	
-	//Set up the Text Area to write your notes in
+	//set up the text field under the "Notes" tab
 	private void setupTextArea(JTextArea a) {
 		a.setBackground(getBackground());
 		a.setLineWrap(true);
@@ -145,7 +136,7 @@ public class TabMenu extends JTabbedPane {
 		a.setEditable(false);
 	}
 	
-	//Set up the Answer Table tab that keeps track of your answer
+	//GETTERS
 	public JTable getAnswerTable() {
 		return answerTable;
 	}
