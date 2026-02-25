@@ -101,9 +101,9 @@ public class PuzzleUI extends JPanel {
 		
 		//grid labels
 		lt1 = new GridLabelGroup(info.getCandidates()[1], gridSize, true);
-		lt2 = new GridLabelGroup(info.getCandidates()[0], gridSize, true);
+		lt2 = new GridLabelGroup(info.getCandidates()[2], gridSize, true);
 		
-		ls1 = new GridLabelGroup(info.getCandidates()[2], gridSize, false);
+		ls1 = new GridLabelGroup(info.getCandidates()[0], gridSize, false);
 		ls2 = new GridLabelGroup(info.getCandidates()[2], gridSize, false);
 		
 		//grids
