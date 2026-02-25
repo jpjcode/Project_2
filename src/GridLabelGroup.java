@@ -1,12 +1,19 @@
 //Lior Sapir
 
-import javax.swing.*;
 import java.awt.*;
-
+import javax.swing.*;
+/**
+ * GridLabelGroup stores a multiple labels.
+ */
 public class GridLabelGroup extends JPanel {
-	
+	/**
+	 * Array of GridLabel objects.
+	 */
 	private GridLabel[] labels;
 	
+	/**
+	 * Default constructor that leaves an empty text.
+	 */
 	public GridLabelGroup() {
 		this(new String[] {"", "", "", ""});
 	}
@@ -19,6 +26,12 @@ public class GridLabelGroup extends JPanel {
 		this(text, groupSize, false);
 	}
 	
+	/**
+	 * Constructor recieves text, integer value of the size of the group, and a boolean that tells reather it is sideway.
+	 * @param text
+	 * @param groupSize
+	 * @param sideways
+	 */
 	public GridLabelGroup(String[] text, int groupSize, boolean sideways) {
 		int labelWidth = groupSize / text.length;
 		
