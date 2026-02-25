@@ -10,16 +10,18 @@ import javax.swing.JPanel;
 
 public class GridCellPanel extends JPanel {
 	
-	//static variables for colors
+	//static variables for various colors
 	public static final Color X_RED = new Color(140, 31, 17);
 	public static final Color CIRCLE_GREEN = new Color(123, 192, 109);
 	public static final Color HOVER_YELLOW = new Color(252, 250, 167);
 	public static final Color HINT_YELLOW = new Color(252, 253, 86);
 	public static final Color ERROR_RED = new Color(241, 195, 203);
 	
+	//store the panel state and whether the panel is being hovered on
 	private CellState state;
 	private boolean isHovering;
 	
+	//store the cells's position in the grid panel
 	private int gridX;
 	private int gridY;
 	
@@ -40,19 +42,22 @@ public class GridCellPanel extends JPanel {
 		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(cellSize, cellSize));
 	}
-
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		//draw a border
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, getWidth(), getHeight());
 		
+		// draw a green circle if the state is correct
 		if (state == CellState.CORRECT) {
 			g.setColor(CIRCLE_GREEN);
 			int margin = (getWidth() / 10);
 			g.fillOval(margin, margin, getWidth() - margin * 2, getHeight() - margin * 2);
 		}
+		//draw a red x if the state is incorrect
 		else if (state == CellState.INCORRECT) {
 			g.setColor(X_RED);
 			Graphics2D g2D = (Graphics2D)(g.create());
@@ -64,6 +69,7 @@ public class GridCellPanel extends JPanel {
 		}
 	}
 	
+	//getters and setters for state
 	public CellState getState() {
 		return state;
 	}
@@ -73,6 +79,7 @@ public class GridCellPanel extends JPanel {
 		repaint();
 	}
 	
+	//cycle between the 3 possible states
 	public void cycleState() {
 		if (state == CellState.EMPTY) {
 			state = CellState.INCORRECT;
@@ -86,6 +93,7 @@ public class GridCellPanel extends JPanel {
 		repaint();
 	}
 	
+	//set whether the mouse is hovering on this panel
 	public void setHovering(boolean hovering) {
 		if (hovering) {
 			isHovering = true;
@@ -97,10 +105,12 @@ public class GridCellPanel extends JPanel {
 		}
 	}
 	
+	//return whether the mouse is hovering on this panel
 	public boolean isHovering() {
 		return isHovering;
 	}
 	
+	//get grid coordinates
 	public int getGridX() {
 		return gridX;
 	}
