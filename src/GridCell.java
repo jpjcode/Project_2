@@ -28,6 +28,8 @@ public class GridCell {
     @Override
     public String toString() {
         String s = "";
+
+        s += "[" + state + "]";
         
        return s;
     }

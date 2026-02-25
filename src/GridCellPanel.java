@@ -14,6 +14,7 @@ public class GridCellPanel extends JPanel {
 	public static final Color X_RED = new Color(140, 31, 17);
 	public static final Color CIRCLE_GREEN = new Color(123, 192, 109);
 	public static final Color HOVER_YELLOW = new Color(252, 250, 167);
+	public static final Color HINT_YELLOW = new Color(252, 253, 86);
 	
 	private CellState state;
 	private boolean isHovering;
