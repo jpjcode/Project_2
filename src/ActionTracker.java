@@ -17,7 +17,7 @@ public class ActionTracker {
 		actionHistory.add(new Action(l, cell, state));
 		
 		if (actionHistory.size() > 15) {
-			actionHistory.remove(0);
+			actionHistory.removeFirst();
 		}
 	}
 	
@@ -25,16 +25,16 @@ public class ActionTracker {
 		actionHistory.add(a);
 		
 		if (actionHistory.size() > 15) {
-			actionHistory.remove(0);
+			actionHistory.removeFirst();
 		}
 	}
 	
 	public Action getLastAction() {
-		return actionHistory.get(actionHistory.size() - 1);
+		return actionHistory.getLast();
 	}
 	
 	public void removeLastAction() {
-		actionHistory.remove(actionHistory.size() - 1);
+		actionHistory.removeLast();
 	}
 	
 	public void clear() {

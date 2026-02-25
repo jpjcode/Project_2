@@ -1,8 +1,19 @@
 //Lior Sapir
 
+/*
+ * This is a class that stores details about the state of a cell right before it was clicked. 
+ * This class is used to remember actions and undo them.
+ */
+
 public class Action {
+	
+	//the gridListener that performed the action
 	private GridListener gridListener;
+	
+	//the cell that recieved the action
 	private GridCellPanel cell;
+	
+	//the state right before the action occured
 	private CellState state;
 	
 	public Action() {

@@ -1,10 +1,14 @@
 //Jonathan Joseph
 //edited by Andrew Larrazabal and Lior Sapir
 
+/*
+ * This class stores the full state of a logic puzzle using a set of Grid objects.
+ */
 import java.util.Scanner;
 
 class Answer {
 
+	//array of Grids
     private Grid[] grids;
 
     public Answer() {
@@ -21,6 +25,8 @@ class Answer {
     public Answer(Grid[] grids) {
         this.grids = grids;
     }
+    
+    //Intitialize an answer object using a string. Used to read the correct answer from a csv file
     public Answer(String s) {
     	grids = new Grid[3];
     	Scanner scnr = new Scanner(s);
@@ -33,6 +39,8 @@ class Answer {
     	scnr.close();
     }
 
+    //compare this Answer object to another, and return a new Answer object whose cells mark
+    //whether or not there is a difference in that cell between the two compared Answers
     public Answer compareTo(Answer other) {
         Grid[] newGrid = new Grid[3];
         
@@ -42,14 +50,17 @@ class Answer {
         return new Answer(newGrid);
     }
     
+    //set one of the Grid objects
     public void setGrid(int i, Grid grid) {
         grids[i] = grid;
     }
 
+    //get the Grid objects
     public Grid[] getGrids() {
         return grids;
     }
 
+    //check if all the cells in two Answer objects have the same state
     @Override
     public boolean equals(Object obj) {
     	if (!(obj instanceof Answer)) {
