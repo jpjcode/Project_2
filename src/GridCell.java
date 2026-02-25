@@ -1,6 +1,10 @@
 //Andrew Larrazabal
 //package project2.Project_2.src;
 
+/*
+ * This class stores the state of an individual cell in the Grid objects which represent the state of the puzzle game.
+ */
+
 public class GridCell {
     //ATTRIBUTES
     boolean state;
@@ -12,7 +16,8 @@ public class GridCell {
     public GridCell(boolean state) {
         this.state = state;
     }
-
+    
+    //getters and setters for state
     public boolean getState() {
         return state;
     } 
@@ -21,6 +26,7 @@ public class GridCell {
         this.state = state;
     }
     
+    //check if two GridCells have the same state
     @Override
     public boolean equals(Object obj) {
     	if (!(obj instanceof GridCell)) {

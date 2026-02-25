@@ -1,5 +1,9 @@
 //Lior Sapir
 
+/*
+ * This class stores a set of Actions in an ArrayList. used to keep track of the user's clicks on the grid to undo them.
+ */
+
 import java.util.ArrayList;
 
 public class ActionTracker {
@@ -13,11 +17,12 @@ public class ActionTracker {
 		actionHistory = actions;
 	}
 	
+	//add an action to the ArrayList
 	public void addAction(GridListener l, GridCellPanel cell, CellState state) {
 		actionHistory.add(new Action(l, cell, state));
 		
 		if (actionHistory.size() > 15) {
-			actionHistory.remove(0);
+			actionHistory.removeFirst();
 		}
 	}
 	
@@ -25,22 +30,26 @@ public class ActionTracker {
 		actionHistory.add(a);
 		
 		if (actionHistory.size() > 15) {
-			actionHistory.remove(0);
+			actionHistory.removeFirst();
 		}
 	}
 	
+	//get the most recent action
 	public Action getLastAction() {
-		return actionHistory.get(actionHistory.size() - 1);
+		return actionHistory.getLast();
 	}
 	
+	//remove the most recent action
 	public void removeLastAction() {
-		actionHistory.remove(actionHistory.size() - 1);
+		actionHistory.removeLast();
 	}
 	
+	//clear the ArrayList
 	public void clear() {
 		actionHistory = new ArrayList<Action>();
 	}
 	
+	//return whether any Actions are stored
 	public boolean isEmpty() {
 		return actionHistory.size() == 0;
 	}

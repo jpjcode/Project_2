@@ -1,6 +1,13 @@
 //Jonathan Joseph
 //Edited by Lior Sapir
 
+/*
+ * This class is responsible for all functionality and interactivity in the program. It 
+ * detects user input using JButtons and GridListeners and makes the corresponding changes
+ * to both the view and model of the program. It implements actionlistener so that it can
+ * listen to its buttons.
+ */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,18 +19,26 @@ import javax.swing.JTable;
 
 public class Controller extends JPanel implements ActionListener {
 
+	//store the puzzle grid and the table from the tab menu
     private PuzzleUI puzzleUI;
     private JTable table;
     
+    //store the correct answer and the current state of the puzzle grid
     private Answer correctAnswer;
     private Answer userAnswer;
     
+    //store the grid listeners and the action history tracker
     private GridListener[] gridListeners;
     private ActionTracker actionTracker;
 
+    public Controller() {
+    	//does nothing without parameters
+    }
+    
     public Controller(PuzzleUI puzzleUI, TabMenu tabMenu, PuzzleInfo info) {
     	setBackground(Color.WHITE);
     	
+    	//initialize reference variables with new objects using the correct information from PuzzleInfo
         this.puzzleUI = puzzleUI;
         this.table = tabMenu.getAnswerTable();
         
@@ -33,6 +48,7 @@ public class Controller extends JPanel implements ActionListener {
         this.gridListeners = new GridListener[correctAnswer.getGrids().length];
         this.actionTracker = new ActionTracker();
         
+        //initialize the gridlisteners, providing them with the correct GridLabelGroups, Grids, and JTable
         GridLabelGroup[][] labelPairs = puzzleUI.getGridLabelGroupPairs();
         
         for (int i = 0; i < table.getColumnCount() - 1; ++i) {
@@ -44,24 +60,28 @@ public class Controller extends JPanel implements ActionListener {
         	puzzleUI.getGridPanels()[i].addGridListener(gridListeners[i]);
         }
 
+        //create jbutton objects for all the button functions
         JButton undo = new JButton("Undo");
         JButton hint = new JButton("Hint");
         JButton clearErrors = new JButton("Clear Errors");
         JButton startOver = new JButton("Start Over");
         JButton submit = new JButton("Submit");
      
+        //set their action commands so that the Controller can differentiate between each button
         undo.setActionCommand("undo");
         hint.setActionCommand("hint");
         clearErrors.setActionCommand("clear_errors");
         startOver.setActionCommand("start_over");
         submit.setActionCommand("submit");
         
+        //add the controller as an action listener to the buttons
         undo.addActionListener(this);
         hint.addActionListener(this);
         clearErrors.addActionListener(this);
         startOver.addActionListener(this);
         submit.addActionListener(this);
    
+        //add the buttons to the panel
         add(undo);
         add(hint);
         add(clearErrors);
@@ -69,8 +89,10 @@ public class Controller extends JPanel implements ActionListener {
         add(submit);
     }
 
+    //perform a certain action to the game depending on what button is pressed
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//undo the most recent action
         if (e.getActionCommand().equals("undo")) {
         	//use action tracker to undo recent actions
             if (!actionTracker.isEmpty()) {
@@ -97,9 +119,9 @@ public class Controller extends JPanel implements ActionListener {
             }
         	
         }
+        //find first unmarked correct answer and highlight it
         else if (e.getActionCommand().equals("hint")) {
         	
-        	//find first unmarked correct answer and highlight it
         	boolean hintFound = false;
         	for (int i = 0; i < correctAnswer.getGrids().length; ++i) {
         		Grid answerGrid = correctAnswer.getGrids()[i];
@@ -123,32 +145,10 @@ public class Controller extends JPanel implements ActionListener {
 				}	
         	}
         	
-        	//FIXME: debugging
-        	for (int i = 0; i < correctAnswer.getGrids().length; ++i) {
-        		Grid grid = correctAnswer.getGrids()[i];
-        		for (int j = 0; j < grid.getGridHeight(); j++) {
-        			for (int k=0; k < grid.getGridWidth(); k++) {
-        				System.out.print(grid.getGridCell(k, j).getState());
-        			}
-        			System.out.println();
-        		}
-        		System.out.println();
-        	}
-        	
-        	System.out.println("user answer");
-        	for (int i = 0; i < userAnswer.getGrids().length; ++i) {
-        		Grid grid = userAnswer.getGrids()[i];
-        		for (int j = 0; j < grid.getGridHeight(); j++) {
-        			for (int k=0; k < grid.getGridWidth(); k++) {
-        				System.out.print(grid.getGridCell(k, j).getState());
-        			}
-        			System.out.println();
-        		}
-        		System.out.println();
-        	}
         }
+        //clear any errors on the grid by using CompareTo with the user answer and correct answer
         else if (e.getActionCommand().equals("clear_errors")) {
-        	//clear errors on grid
+
         	Answer cellsToClear = userAnswer.compareTo(correctAnswer);
         	
         	for (int i = 0; i < userAnswer.getGrids().length; ++i) {
@@ -178,6 +178,7 @@ public class Controller extends JPanel implements ActionListener {
         	
         	actionTracker.clear();
         }
+        //reset the game
         else if (e.getActionCommand().equals("start_over")) {
         	
         	//clear grids and grid panels
@@ -202,6 +203,7 @@ public class Controller extends JPanel implements ActionListener {
         	actionTracker.clear();
         	
         }
+        //submit the puzzle and recieve feedback on whether your puzzle grid is correct or not
         else if (e.getActionCommand().equals("submit")) {
         	
         	if (!(userAnswer.equals(correctAnswer))) {
