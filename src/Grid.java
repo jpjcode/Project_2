@@ -1,5 +1,3 @@
-package cs225project2;
-
 //Andrew Larrazabal
 
 //edited by Lior Sapir and Jonathan Joseph

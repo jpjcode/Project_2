@@ -2,10 +2,19 @@
 //edited by Andrew Larrazabal
 //edited by Jonathan Joseph
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 
 public class PuzzleUI extends JPanel {
+	//ATTRIBUTES
 	public static final int MIN_GRID_SIZE = 132;
 	public static final int MIN_CELL_SIZE = 23;
 
@@ -19,6 +28,7 @@ public class PuzzleUI extends JPanel {
 	private GridPanel grid2;
 	private GridPanel grid3;
 	
+	//CONSTRUCTORS
 	public PuzzleUI() {
 		this(4);
 	}
@@ -122,6 +132,9 @@ public class PuzzleUI extends JPanel {
 		add(pEmpty2);
 	}
 	
+	//METHODS
+
+	//GETTERS
 	public GridLabelGroup[][] getGridLabelGroupPairs() {
 		return new GridLabelGroup[][] {{ls1, lt1}, {ls1, lt2}, {ls2, lt1}};
 	}
@@ -130,6 +143,7 @@ public class PuzzleUI extends JPanel {
 		return new GridPanel[] {grid1, grid2, grid3};
 	}
 	
+	//Paint Component to set up the Grid Puzzle UI
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

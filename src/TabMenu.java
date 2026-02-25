@@ -4,7 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TabMenu extends JTabbedPane {
-	
+
+	//ATTRIBUTES
 	public static final Color NOTES_GREY = new Color(240, 240, 240);
 	public static final Color ANSWER_TABLE_GREY = new Color(192, 192, 192);
 	
@@ -24,6 +25,7 @@ public class TabMenu extends JTabbedPane {
 	
 	private JTable answerTable;
 	
+	//CONSTRUCTORS
 	public TabMenu() {
 		this(null);
 	}
@@ -86,6 +88,7 @@ public class TabMenu extends JTabbedPane {
 		addTab("notes", notes);
 		addTab("answers", answers);
 		
+		//Display all the clues, story, notes, and answers in each of their respective tabs
 		if (info != null) {
 			String cluesStr = "";
 			for (int i = 0; i < info.getClues().length; ++i) {
@@ -108,6 +111,7 @@ public class TabMenu extends JTabbedPane {
 				}
 			}
 			
+			//Set up Answer Table
 			answerTable = new JTable(candidates, info.getCategories());
 			answerTable.setEnabled(false);
 			answerTable.getTableHeader().setBackground(ANSWER_TABLE_GREY);
@@ -123,12 +127,16 @@ public class TabMenu extends JTabbedPane {
 		}
 	}
 	
+	//METHODS
+
+	//Set up the Tab Menu Panel
 	private void setupPanel(JPanel p) {
 		p.setBackground(getBackground());
 		p.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 		p.setLayout(new BorderLayout());
 	}
 	
+	//Set up the Text Area to write your notes in
 	private void setupTextArea(JTextArea a) {
 		a.setBackground(getBackground());
 		a.setLineWrap(true);
@@ -137,6 +145,7 @@ public class TabMenu extends JTabbedPane {
 		a.setEditable(false);
 	}
 	
+	//Set up the Answer Table tab that keeps track of your answer
 	public JTable getAnswerTable() {
 		return answerTable;
 	}
