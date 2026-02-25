@@ -6,15 +6,19 @@
 //Grid class to set up the logic puzzle
 
 public class Grid {
+    //ATTRIBUTES
     private GridCell[][] grid;
 
     public Grid() {
         this(4, 4, new String[] {});
-    } 
+    }
+
+    //CONSTRUCTORS
     public Grid(int width, int height, String[] s) {
 
     	grid = new GridCell[height][width];
 
+        //Set each Grid Cell in the Grid
     	if (s.length != 0) {
     		for (int i = 0; i < height; i++) {
     			int correctCell = Integer.parseInt(s[i]);
@@ -27,8 +31,7 @@ public class Grid {
     				}
     			}
     		}
-    	}
-    	else {
+    	} else {
     		for (int i = 0; i < height; i++) {
     			for (int j = 0; j < width; j++) {
     				grid[i][j] = new GridCell();
@@ -36,31 +39,10 @@ public class Grid {
     		}
     	}
     }
-
-    public Grid compareTo(Grid other) {
-        Grid grid = new Grid();
-
-        for (int w = 0; w < grid.getGridWidth(); w++) {
-            for(int h = 0; h < grid.getGridHeight(); h++) {
-                other.getGridCell(w, h);
-                if(other.getGridCell(w, h).equals(getGridCell(w, h))) {
-                    grid.setGridCell(w, h, true);
-                }
-                else {
-                    grid.setGridCell(w, h, false);
-                }
-            }
-            
-        }
-        return grid;
-    }
-
+    
+    //GETTERS
     public GridCell getGridCell(int w, int h) {
         return grid[h][w];
-    }
-
-    public void setGridCell(int w, int h, boolean state) {
-        grid[h][w].setState(state);
     }
 
     public int getGridHeight() {
@@ -69,6 +51,11 @@ public class Grid {
 
     public int getGridWidth() {
         return grid[0].length;
+    }
+
+    //SETTERS
+    public void setGridCell(int w, int h, boolean state) {
+        grid[h][w].setState(state);
     }
 
     public boolean equals(Grid other) {
@@ -94,11 +81,3 @@ public class Grid {
         return string;
     }
 }
-
-/*UML CHANGES: 
-- Only 1 Grid is needed, delete rest of other grids.
-- 
-*/
-
-
-

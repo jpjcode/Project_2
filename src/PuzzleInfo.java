@@ -6,12 +6,14 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class PuzzleInfo {
+    //ATTRIBUTES
     private String[] categories;
     private String[][] candidates;
     private String[] clues;
     private String story;
     private Answer answer;
 
+    //CONSTRUCTORS
     public PuzzleInfo() throws FileNotFoundException {
         this(null);
     }
@@ -40,6 +42,7 @@ public class PuzzleInfo {
         fileReader.close();
     }
 
+    //GETTERS
     public String[] getCategories() {
         return categories;
     }
