@@ -1,5 +1,11 @@
 //Lior Sapir
 
+/*
+ * This class contains all of the elements of the tab menu to the right of the game.
+ * It gets its text information from PuzzleInfo and has an answer table that can be
+ * controlled by other objects.
+ */
+
 import javax.swing.*;
 import java.awt.*;
 

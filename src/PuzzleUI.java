@@ -2,6 +2,10 @@
 //edited by Andrew Larrazabal
 //edited by Jonathan Joseph
 
+/*
+ * This class manages all the visual components of the puzzle grid.
+ */
+
 import java.awt.*;
 import javax.swing.*;
 

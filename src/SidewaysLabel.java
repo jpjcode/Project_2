@@ -1,5 +1,9 @@
 //Lior Sapir
 
+/*
+ * This class is a JLabel with a custom paintComponent method that makes its text display sideways
+ */
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
