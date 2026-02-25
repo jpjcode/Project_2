@@ -1,7 +1,7 @@
 Names,Crimes,Sentenced
-5 years,7 years,9 years,Life in Prison
 Brendon Small,Norville Rogers,Frida Suarez,Aunt Jebidisa
 Embezzlement,Identity Theft,Manufacturing,Arson
+5 years,7 years,9 years,Life in Prison
 Embezzlement serves a longer sentence than Identity Theft.,Norville Rogers is serving less time than Aunt Jebidisa.,Brendon's sentence is either the one that serves 9 years or Arson.,Frida is serving less time than Brendon.,Manufacturing serves more time than Embezzlement.,The person convicted of Embezzlement is serving neither the shortest nor the longest sentence.
 You're the new prison guard who's first job is to take in the new convicts and figure out what crimes they've committed. Match each convict to their respective crimes.,,,
 4,,,

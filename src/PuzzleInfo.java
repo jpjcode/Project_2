@@ -113,8 +113,9 @@ public class PuzzleInfo {
         s += "Categories: " + Arrays.toString(categories) + 
                          "\nCandidates: " + Arrays.deepToString(candidates) + 
                          "\nClues: " + Arrays.toString(clues) + 
-                         "\nStory: " + story;
-//FIXME: add answer
+                         "\nStory: " + story +
+                        "\nAnswer: " + answer;
+
         return s;
     }
 }
