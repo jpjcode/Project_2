@@ -30,10 +30,10 @@ class Answer {
     public Answer(String s) {
     	grids = new Grid[3];
     	Scanner scnr = new Scanner(s);
-    	int gridSize = Integer.parseInt(scnr.nextLine().replaceAll(",", ""));
 
     	for (int i = 0; i < grids.length; ++i) {
-    		grids[i] = new Grid(gridSize, gridSize, scnr.nextLine().split(","));
+    		String[] gridStr = scnr.nextLine().split(",");
+    		grids[i] = new Grid(gridStr.length, gridStr.length, gridStr);
     	}
 
     	scnr.close();
