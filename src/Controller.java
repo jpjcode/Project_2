@@ -176,7 +176,10 @@ public class Controller extends JPanel implements ActionListener {
         		}
         	}
         	
+        	//clear action history and control panel background
+        	setBackground(Color.WHITE);
         	actionTracker.clear();
+        	
         }
         //reset the game
         else if (e.getActionCommand().equals("start_over")) {
